@@ -11,7 +11,7 @@ public class RuleStorage {
 
     private final List<Rule> rules;
 
-    public RuleStorage() {
+    private RuleStorage() {
         rules = new ArrayList<>();
     }
 
