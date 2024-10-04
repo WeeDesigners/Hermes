@@ -9,20 +9,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class RuleParserService {
 
-    public RuleParserService(){
+    private final Gson gson;
 
+    public RuleParserService(){
+        gson = new Gson();
     }
 
     public String parseRuleObjectToString(Rule rule){
-
-        return "";
+        return gson.toJson(rule);
     }
 
     public Rule parseRuleStringToObject(String ruleString){
-        Gson gson = new Gson();
-
         JsonObject jsonObject = gson.fromJson(ruleString, JsonObject.class);
-
         if(jsonObject.has("email")){
             return gson.fromJson(jsonObject, NotificationRule.class);
         }
