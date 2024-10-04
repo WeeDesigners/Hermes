@@ -12,7 +12,7 @@ public class Rule {
     public final ActionType action;
 
     public Rule(long id, RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, ActionType action) {
-        this.id = IdGenerator.getRuleId();
+        this.id = id;
         this.attribute = attribute;
         this.subject = subject;
         this.value = value;
