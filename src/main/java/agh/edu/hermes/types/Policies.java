@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Policies {
 
-    private final long id;
+    public final long id;
     private final List<Rule> rules;
 
     private Policies(long id, List<Rule> rules) {
