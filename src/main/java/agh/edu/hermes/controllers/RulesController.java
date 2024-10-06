@@ -34,13 +34,13 @@ public class RulesController {
         return "Rule not added";
     }
 
-    @GetMapping("/getRuleObject")
-    public Rule getRuleObject(@RequestBody long id) {
+    @GetMapping("/getRuleObject/{id}")
+    public Rule getRuleObject(@PathVariable("id") long id) {
         return ruleService.getRuleObject(id);
     }
 
-    @GetMapping("/getRuleString")
-    public String getRuleString(@RequestBody long id) {
+    @GetMapping("/getRuleString/{id}")
+    public String getRuleString(@PathVariable("id") long id) {
         String result = ruleService.getRuleString(id);
         if(result.isEmpty()){
             return "Cannot get rule of id " + id + ".";
