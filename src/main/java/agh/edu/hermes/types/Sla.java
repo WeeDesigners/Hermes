@@ -7,14 +7,18 @@ import java.util.List;
 
 public class Sla {
 
-    public final long id;
     private final List<Rule> rules;
     private final List<NotificationRule> notificationRules;
 
-    private Sla(long id, List<Rule> rules, List<NotificationRule> notificationRules) {
-        this.id = id;
-        this.rules = rules;
-        this.notificationRules = notificationRules;
+    private static final Sla instance = new Sla();
+
+    private Sla() {
+        this.rules = new ArrayList<>();
+        this.notificationRules = new ArrayList<>();
+    }
+
+    public static Sla getInstance() {
+        return instance;
     }
 
     public void addRules(List<Rule> rules){
