@@ -14,7 +14,7 @@ public class RulesController {
     private final RuleService ruleService;
 
     @Autowired
-    public RulesController(@RequestBody RuleService ruleService) {
+    public RulesController(RuleService ruleService) {
         this.ruleService = ruleService;
     }
 
