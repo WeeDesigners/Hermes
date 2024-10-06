@@ -36,6 +36,4 @@ public class SlaController {
     public Sla getSlaObject(){
         return slaService.getSla();
     }
-
-
 }

@@ -1,5 +1,7 @@
 package agh.edu.hermes.types;
 
+import agh.edu.hermes.generators.IdGenerator;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -11,8 +13,8 @@ public class Rule {
     public final UnitType unit;
     public final ActionType action;
 
-    public Rule(long id, RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, ActionType action) {
-        this.id = id;
+    public Rule(RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, ActionType action) {
+        this.id = IdGenerator.getRuleId();
         this.attribute = attribute;
         this.subject = subject;
         this.value = value;
