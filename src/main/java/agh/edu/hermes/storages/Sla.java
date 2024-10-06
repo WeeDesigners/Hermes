@@ -24,29 +24,50 @@ public class Sla {
         return instance;
     }
 
-    public void addRules(List<Rule> rules){
-        this.rules.addAll(rules);
+    private boolean checkUniqueId(long id){
+        for(Rule rule : rules){
+            if(rule.id == id){
+                return false;
+            }
+        }
+        for(NotificationRule rule : notificationRules){
+            if(rule.id == id){
+                return false;
+            }
+        }
+        return true;
     }
 
-    public void addNotificationRules(List<NotificationRule> notificationRules){
-        this.notificationRules.addAll(notificationRules);
+    public boolean addRules(List<Rule> rules){
+        for(Rule rule : rules){
+            if(this.addRule(rule)){
+                return false;
+            }
+        }
+        return true;
     }
 
-    public void addRule(Rule rule){
+    public boolean addRule(Rule rule){
+        if(!checkUniqueId(rule.id)){
+            return false;
+        }
         if(rule instanceof NotificationRule){
             this.notificationRules.add((NotificationRule) rule);
         }
         else {
             this.rules.add(rule);
         }
-    }
-
-    private void addNotificationRule(NotificationRule notificationRule){
-        this.notificationRules.add(notificationRule);
+        return true;
     }
 
     public Rule removeRule(long id){
         for(Rule rule : rules){
+            if(rule.id == id){
+                rules.remove(rule);
+                return rule;
+            }
+        }
+        for(NotificationRule rule : notificationRules){
             if(rule.id == id){
                 rules.remove(rule);
                 return rule;

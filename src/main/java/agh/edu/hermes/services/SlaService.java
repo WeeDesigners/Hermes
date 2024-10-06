@@ -12,24 +12,18 @@ public class SlaService {
     public boolean addRuleToSla(Rule rule){
         Sla sla = Sla.getInstance();
         if(SlaViolationChecker.checkRule(rule)){
-            sla.addRule(rule);
-            return true;
+            return sla.addRule(rule);
         }
         return false;
     }
 
     public boolean addRuleToSlaById(long id){
-        Sla sla = Sla.getInstance();
         RuleStorage rs = RuleStorage.getInstance();
         Rule rule = rs.getRule(id);
         if(rule == null){
             return false;
         }
-        if(SlaViolationChecker.checkRule(rule)){
-            sla.addRule(rule);
-            return true;
-        }
-        return false;
+        return addRuleToSla(rule);
     }
 
     public boolean removeRuleFromSla(long id){

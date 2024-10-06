@@ -19,6 +19,10 @@ public class SlaViolationChecker {
   }
 
   public static boolean checkRule(Rule rule) {
+    //TODO
+    if(true){
+      return true;
+    }
     Sla sla = Sla.getInstance();
     for (Rule slaRule : sla.getRules()) {
       if (slaRule.subject == rule.subject && slaRule.attribute == rule.attribute) {

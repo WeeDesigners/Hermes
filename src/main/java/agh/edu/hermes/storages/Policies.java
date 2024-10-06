@@ -19,12 +19,30 @@ public class Policies {
         return instance;
     }
 
-    public void addRules(List<Rule> rules){
-        this.rules.addAll(rules);
+    private boolean checkUniqueId(long id){
+        for(Rule rule : rules){
+            if(rule.id == id){
+                return false;
+            }
+        }
+        return true;
     }
 
-    public void addRule(Rule rule){
-        this.rules.add(rule);
+    public boolean addRules(List<Rule> rules){
+        for(Rule rule : rules){
+            if(!this.addRule(rule)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean addRule(Rule rule){
+        if(checkUniqueId(rule.id)){
+            this.rules.add(rule);
+            return true;
+        }
+        return false;
     }
 
     public Rule removeRule(long id){

@@ -11,11 +11,9 @@ public class RuleStorage {
     private static final RuleStorage instance = new RuleStorage();
 
     private final List<Rule> rules;
-    private final List<NotificationRule> notificationRules;
 
     private RuleStorage() {
         rules = new ArrayList<>();
-        notificationRules = new ArrayList<>();
     }
 
     public static RuleStorage getInstance() {
