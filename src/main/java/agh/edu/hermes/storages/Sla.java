@@ -1,5 +1,8 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.storages;
 
+
+import agh.edu.hermes.types.NotificationRule;
+import agh.edu.hermes.types.Rule;
 
 import java.util.ArrayList;
 import java.util.List;

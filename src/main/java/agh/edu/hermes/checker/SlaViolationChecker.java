@@ -3,7 +3,7 @@ package agh.edu.hermes.checker;
 
 import agh.edu.hermes.types.ActionType;
 import agh.edu.hermes.types.Rule;
-import agh.edu.hermes.types.Sla;
+import agh.edu.hermes.storages.Sla;
 
 import java.util.List;
 

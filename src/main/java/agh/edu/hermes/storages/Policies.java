@@ -1,16 +1,22 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.storages;
+
+import agh.edu.hermes.types.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Policies {
 
-    public final long id;
     private final List<Rule> rules;
 
-    private Policies(long id, List<Rule> rules) {
-        this.id = id;
-        this.rules = rules;
+    private final static Policies instance = new Policies();
+
+    private Policies() {
+        this.rules = new ArrayList<>();
+    }
+
+    public static Policies getInstance() {
+        return instance;
     }
 
     public void addRules(List<Rule> rules){
