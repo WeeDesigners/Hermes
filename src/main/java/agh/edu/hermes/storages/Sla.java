@@ -33,10 +33,15 @@ public class Sla {
     }
 
     public void addRule(Rule rule){
-        this.rules.add(rule);
+        if(rule instanceof NotificationRule){
+            this.notificationRules.add((NotificationRule) rule);
+        }
+        else {
+            this.rules.add(rule);
+        }
     }
 
-    public void addNotificationRule(NotificationRule notificationRule){
+    private void addNotificationRule(NotificationRule notificationRule){
         this.notificationRules.add(notificationRule);
     }
 

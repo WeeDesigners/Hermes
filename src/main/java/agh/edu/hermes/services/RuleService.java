@@ -41,5 +41,4 @@ public class RuleService {
         }
         return ruleParserService.parseRuleObjectToString(rule);
     }
-
 }
