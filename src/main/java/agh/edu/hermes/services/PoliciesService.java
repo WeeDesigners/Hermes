@@ -34,5 +34,9 @@ public class PoliciesService {
         return (removed != null);
     }
 
+    public Policies getPolicies(){
+        return Policies.getInstance();
+    }
+
 
 }

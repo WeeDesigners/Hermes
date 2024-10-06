@@ -38,4 +38,8 @@ public class SlaService {
         return (removed != null);
     }
 
+    public Sla getSla(){
+        return Sla.getInstance();
+    }
+
 }

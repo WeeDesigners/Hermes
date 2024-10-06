@@ -1,6 +1,7 @@
 package agh.edu.hermes.controllers;
 
 import agh.edu.hermes.services.SlaService;
+import agh.edu.hermes.storages.Sla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,11 @@ public class SlaController {
             return "Rule id=" + id + " is removed from SLA";
         }
         return "Rule id=" + id + " is not removed from SLA";
+    }
+
+    @GetMapping("/get")
+    public Sla getSlaObject(){
+        return slaService.getSla();
     }
 
 
