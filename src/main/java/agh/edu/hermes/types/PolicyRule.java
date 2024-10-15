@@ -1,8 +1,10 @@
 package agh.edu.hermes.types;
 
+import agh.edu.hermes.generators.IdGenerator;
 import agh.edu.hermes.types.attributes.*;
 import agh.edu.hermes.types.base.Rule;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +12,12 @@ public class PolicyRule extends Rule {
 
     public final Action action;
     public Params params;
+
+    public PolicyRule(){
+        super();
+        this.action = null;
+        this.params = null;
+    }
 
     public PolicyRule(RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, RelationType relation, Action action, Params params) {
         super(attribute, subject, value, unit, relation);
