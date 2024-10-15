@@ -2,6 +2,7 @@ package agh.edu.hermes.storages;
 
 
 import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.SlaRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class Sla {
 
-    private final List<Rule> rules;
+    private final List<SlaRule> rules;
 
     private static final Sla instance = new Sla();
 
@@ -30,8 +31,8 @@ public class Sla {
         return true;
     }
 
-    public boolean addRules(List<Rule> rules){
-        for(Rule rule : rules){
+    public boolean addRules(List<SlaRule> rules){
+        for(SlaRule rule : rules){
             if(this.addRule(rule)){
                 return false;
             }
@@ -39,7 +40,7 @@ public class Sla {
         return true;
     }
 
-    public boolean addRule(Rule rule){
+    public boolean addRule(SlaRule rule){
         if(!checkUniqueId(rule.id)){
             return false;
         }
@@ -49,8 +50,8 @@ public class Sla {
         return true;
     }
 
-    public Rule removeRule(long id){
-        for(Rule rule : rules){
+    public SlaRule removeRule(long id){
+        for(SlaRule rule : rules){
             if(rule.id == id){
                 rules.remove(rule);
                 return rule;
@@ -67,7 +68,7 @@ public class Sla {
         removeRules();
     }
 
-    public List<Rule> getRules() {
+    public List<SlaRule> getRules() {
         return new ArrayList<>(rules);
     }
 

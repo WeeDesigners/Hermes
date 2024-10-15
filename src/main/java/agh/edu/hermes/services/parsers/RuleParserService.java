@@ -1,7 +1,8 @@
 package agh.edu.hermes.services.parsers;
 
-import agh.edu.hermes.types.NotificationRule;
+import agh.edu.hermes.types.PolicyRule;
 import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.SlaRule;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,10 @@ public class RuleParserService {
 
     public Rule parseRuleStringToObject(String ruleString){
         JsonObject jsonObject = gson.fromJson(ruleString, JsonObject.class);
-        if(jsonObject.has("email")){
-            return gson.fromJson(jsonObject, NotificationRule.class);
+        if(jsonObject.has("action")){
+            return gson.fromJson(jsonObject, PolicyRule.class);
         }
-        return gson.fromJson(jsonObject, Rule.class);
+        return gson.fromJson(jsonObject, SlaRule.class);
     }
 
 }

@@ -1,5 +1,6 @@
 package agh.edu.hermes.storages;
 
+import agh.edu.hermes.types.PolicyRule;
 import agh.edu.hermes.types.Rule;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class Policies {
 
-    private final List<Rule> rules;
+    private final List<PolicyRule> rules;
 
     private final static Policies instance = new Policies();
 
@@ -28,8 +29,8 @@ public class Policies {
         return true;
     }
 
-    public boolean addRules(List<Rule> rules){
-        for(Rule rule : rules){
+    public boolean addRules(List<PolicyRule> rules){
+        for(PolicyRule rule : rules){
             if(!this.addRule(rule)){
                 return false;
             }
@@ -37,7 +38,7 @@ public class Policies {
         return true;
     }
 
-    public boolean addRule(Rule rule){
+    public boolean addRule(PolicyRule rule){
         if(checkUniqueId(rule.id)){
             this.rules.add(rule);
             return true;
@@ -45,8 +46,8 @@ public class Policies {
         return false;
     }
 
-    public Rule removeRule(long id){
-        for(Rule rule : rules){
+    public PolicyRule removeRule(long id){
+        for(PolicyRule rule : rules){
             if(rule.id == id){
                 rules.remove(rule);
                 return rule;
@@ -56,7 +57,7 @@ public class Policies {
     }
 
 
-    public List<Rule> getRules() {
+    public List<PolicyRule> getRules() {
         return new ArrayList<>(rules);
     }
 
