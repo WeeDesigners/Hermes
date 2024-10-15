@@ -1,11 +1,15 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.types.base;
 
 import agh.edu.hermes.generators.IdGenerator;
+import agh.edu.hermes.types.attributes.RelationType;
+import agh.edu.hermes.types.attributes.RuleAttribute;
+import agh.edu.hermes.types.attributes.RuleSubject;
+import agh.edu.hermes.types.attributes.UnitType;
 
 import java.util.List;
 import java.util.Objects;
 
-public class Rule {
+public abstract class Rule {
     public final long id;
     public final RuleAttribute attribute;
     public final RuleSubject subject;

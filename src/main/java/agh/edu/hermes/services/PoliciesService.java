@@ -1,12 +1,10 @@
 package agh.edu.hermes.services;
 
 
-import agh.edu.hermes.checker.SlaViolationChecker;
 import agh.edu.hermes.storages.Policies;
 import agh.edu.hermes.storages.RuleStorage;
-import agh.edu.hermes.storages.Sla;
 import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.base.Rule;
 import org.springframework.stereotype.Service;
 
 @Service

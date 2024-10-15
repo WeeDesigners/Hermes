@@ -1,5 +1,8 @@
 package agh.edu.hermes.types;
 
+import agh.edu.hermes.types.attributes.*;
+import agh.edu.hermes.types.base.Rule;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

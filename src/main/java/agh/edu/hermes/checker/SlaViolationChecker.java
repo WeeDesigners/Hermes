@@ -1,8 +1,8 @@
 package agh.edu.hermes.checker;
 
 
-import agh.edu.hermes.types.RelationType;
-import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.attributes.RelationType;
+import agh.edu.hermes.types.base.Rule;
 import agh.edu.hermes.storages.Sla;
 
 import java.util.List;

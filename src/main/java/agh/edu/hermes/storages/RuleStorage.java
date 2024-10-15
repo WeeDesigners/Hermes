@@ -1,6 +1,6 @@
 package agh.edu.hermes.storages;
 
-import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.base.Rule;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,12 @@
 package agh.edu.hermes.types;
 
+import agh.edu.hermes.types.attributes.*;
+import agh.edu.hermes.types.base.Rule;
+
 import java.util.List;
 import java.util.Objects;
 
-public class PolicyRule extends Rule{
+public class PolicyRule extends Rule {
 
     public final Action action;
     public Params params;
