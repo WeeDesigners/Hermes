@@ -12,8 +12,7 @@ public class PoliciesService {
 
     public boolean addRuleToPolicies(PolicyRule rule){
         Policies policies = Policies.getInstance();
-        policies.addRule(rule);
-        return true;
+        return policies.addRule(rule);
     }
 
     public boolean addRuleToPoliciesById(long id){
@@ -23,8 +22,7 @@ public class PoliciesService {
         if(rule == null || rule.getClass() != PolicyRule.class){
             return false;
         }
-        policies.addRule((PolicyRule) rule);
-        return true;
+        return policies.addRule((PolicyRule) rule);
     }
 
     public boolean removeRuleFromPolicies(long id){
