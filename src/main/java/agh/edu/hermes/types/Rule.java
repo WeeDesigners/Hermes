@@ -11,7 +11,7 @@ public class Rule {
     public final RuleSubject subject;
     public final List<Number> value;
     public final UnitType unit;
-    public final ActionType action;
+    public final RelationType relation;
 
     public Rule(){
         this.id = IdGenerator.getRuleId();
@@ -19,16 +19,16 @@ public class Rule {
         this.subject = null;
         this.value = null;
         this.unit = null;
-        this.action = null;
+        this.relation = null;
     }
 
-    public Rule(RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, ActionType action) {
+    public Rule(RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, RelationType action) {
         this.id = IdGenerator.getRuleId();
         this.attribute = attribute;
         this.subject = subject;
         this.value = value;
         this.unit = unit;
-        this.action = action;
+        this.relation = action;
     }
 
     @Override
@@ -38,18 +38,18 @@ public class Rule {
         if (o == null || getClass() != o.getClass())
             return false;
         Rule rule = (Rule) o;
-        return attribute == rule.attribute && subject == rule.subject && Objects.equals(value, rule.value) && unit == rule.unit && action == rule.action;
+        return attribute == rule.attribute && subject == rule.subject && Objects.equals(value, rule.value) && unit == rule.unit && relation == rule.relation;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(attribute, subject, value, unit, action);
+        return Objects.hash(attribute, subject, value, unit, relation);
     }
 
     @Override
     public String toString() {
         //TODO -> better concat
-        return "{ " + id + ", " + attribute + ", " + subject + ", " + value + ", " + unit + ", " + action + " }";
+        return "{ " + id + ", " + attribute + ", " + subject + ", " + value + ", " + unit + ", " + relation + " }";
     }
 
 }

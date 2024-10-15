@@ -3,10 +3,10 @@ package agh.edu.hermes.types;
 import java.util.List;
 
 
-public enum ActionType {
+public enum RelationType {
 
     //to execute functions use:
-    // ActionType.TYPE.apply(arg1, arg2);
+    // RelationType.TYPE.apply(arg1, arg2);
 
     GT {
         @Override

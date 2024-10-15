@@ -1,7 +1,7 @@
 package agh.edu.hermes.checker;
 
 
-import agh.edu.hermes.types.ActionType;
+import agh.edu.hermes.types.RelationType;
 import agh.edu.hermes.types.Rule;
 import agh.edu.hermes.storages.Sla;
 
@@ -29,28 +29,28 @@ public class SlaViolationChecker {
         if (slaRule.unit != rule.unit) {
           throw new IllegalArgumentException();
         }
-        if (slaRule.action == ActionType.EQ || rule.action == ActionType.EQ) {
-          if (slaRule.action == ActionType.EQ && rule.action == ActionType.EQ) {
-            ActionType action = slaRule.action;
+        if (slaRule.action == RelationType.EQ || rule.action == RelationType.EQ) {
+          if (slaRule.action == RelationType.EQ && rule.action == RelationType.EQ) {
+            RelationType action = slaRule.action;
             if (!action.apply(slaRule.value, rule.value.get(0))) {
               return true;
             }
           } else {
             return true;
           }
-        } else if (slaRule.action == ActionType.BT && rule.action == ActionType.BT) {
+        } else if (slaRule.action == RelationType.BT && rule.action == RelationType.BT) {
           if (!isBetween(slaRule.value, rule.value)) {
             return true;
           }
-        } else if (slaRule.action == ActionType.BT) {
-          ActionType action = rule.action;
+        } else if (slaRule.action == RelationType.BT) {
+          RelationType action = rule.action;
           Number n1 = slaRule.value.get(0);
           Number n2 = slaRule.value.get(1);
           if (!(action.apply(rule.value, n1) || action.apply(rule.value, n2))) {
             return true;
           }
-        } else if (rule.action == ActionType.BT) {
-          ActionType action = slaRule.action;
+        } else if (rule.action == RelationType.BT) {
+          RelationType action = slaRule.action;
           Number n1 = rule.value.get(0);
           Number n2 = rule.value.get(1);
           if (!(action.apply(slaRule.value, n1) && action.apply(slaRule.value, n2))) {
@@ -59,7 +59,7 @@ public class SlaViolationChecker {
         } else if (slaRule.action != rule.action) {
           return true;
         } else {
-          ActionType action = slaRule.action;
+          RelationType action = slaRule.action;
           if (action.apply(slaRule.value, rule.value.get(0))) {
             return true;
           }
