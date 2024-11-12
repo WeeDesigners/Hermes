@@ -1,8 +1,8 @@
 package agh.edu.hermes.storages;
 
 
-import agh.edu.hermes.types.NotificationRule;
-import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.base.Rule;
+import agh.edu.hermes.types.SlaRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +10,12 @@ import java.util.List;
 
 public class Sla {
 
-    private final List<Rule> rules;
-    private final List<NotificationRule> notificationRules;
+    private final List<SlaRule> rules;
 
     private static final Sla instance = new Sla();
 
     private Sla() {
         this.rules = new ArrayList<>();
-        this.notificationRules = new ArrayList<>();
     }
 
     public static Sla getInstance() {
@@ -30,16 +28,11 @@ public class Sla {
                 return false;
             }
         }
-        for(NotificationRule rule : notificationRules){
-            if(rule.id == id){
-                return false;
-            }
-        }
         return true;
     }
 
-    public boolean addRules(List<Rule> rules){
-        for(Rule rule : rules){
+    public boolean addRules(List<SlaRule> rules){
+        for(SlaRule rule : rules){
             if(this.addRule(rule)){
                 return false;
             }
@@ -47,12 +40,9 @@ public class Sla {
         return true;
     }
 
-    public boolean addRule(Rule rule){
+    public boolean addRule(SlaRule rule){
         if(!checkUniqueId(rule.id)){
             return false;
-        }
-        if(rule instanceof NotificationRule){
-            this.notificationRules.add((NotificationRule) rule);
         }
         else {
             this.rules.add(rule);
@@ -60,14 +50,8 @@ public class Sla {
         return true;
     }
 
-    public Rule removeRule(long id){
-        for(Rule rule : rules){
-            if(rule.id == id){
-                rules.remove(rule);
-                return rule;
-            }
-        }
-        for(NotificationRule rule : notificationRules){
+    public SlaRule removeRule(long id){
+        for(SlaRule rule : rules){
             if(rule.id == id){
                 rules.remove(rule);
                 return rule;
@@ -80,31 +64,12 @@ public class Sla {
         this.rules.clear();
     }
 
-    public NotificationRule removeNotificationRule(long id){
-        for(NotificationRule notificationRule : notificationRules){
-            if(notificationRule.id == id){
-                notificationRules.remove(notificationRule);
-                return notificationRule;
-            }
-        }
-        return null;
-    }
-
-    public void removeNotificationRules(){
-        this.notificationRules.clear();
-    }
-
     public void clearSla(){
         removeRules();
-        removeNotificationRules();
     }
 
-    public List<Rule> getRules() {
+    public List<SlaRule> getRules() {
         return new ArrayList<>(rules);
-    }
-
-    public List<NotificationRule> getNotificationRules() {
-        return new ArrayList<>(notificationRules);
     }
 
 
@@ -112,8 +77,7 @@ public class Sla {
     public String toString() {
         //TODO -> better concat
         return "\n====================================\n Rules:\n"
-                + rules + "\n Notification Rules:\n"
-                + notificationRules
+                + rules
                 + "\n====================================\n";
     }
 

@@ -1,4 +1,4 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.types.attributes;
 
 public enum UnitType {
     NUMBER,

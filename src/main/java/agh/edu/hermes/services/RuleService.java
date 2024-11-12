@@ -2,7 +2,7 @@ package agh.edu.hermes.services;
 
 import agh.edu.hermes.services.parsers.RuleParserService;
 import agh.edu.hermes.storages.RuleStorage;
-import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.base.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

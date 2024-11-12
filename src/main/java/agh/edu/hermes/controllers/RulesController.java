@@ -5,7 +5,7 @@ import agh.edu.hermes.services.RuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import agh.edu.hermes.types.Rule;
+import agh.edu.hermes.types.base.Rule;
 
 @RestController
 @RequestMapping("/rules")
