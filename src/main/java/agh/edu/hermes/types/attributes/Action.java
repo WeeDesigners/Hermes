@@ -14,10 +14,6 @@ public enum Action {
             // TODO
             System.out.println("Action 1 - requested");
         }
-
-            //TODO
-            System.out.println("Action 1 - requested");
-        }
     },
     ACTION_2 {
         @Override
