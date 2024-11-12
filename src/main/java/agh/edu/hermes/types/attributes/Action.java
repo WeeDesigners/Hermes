@@ -2,7 +2,6 @@ package agh.edu.hermes.types.attributes;
 
 
 public enum Action {
-
     DEFAULT {
         @Override
         public void request(Params params) {
@@ -12,6 +11,10 @@ public enum Action {
     ACTION_1 {
         @Override
         public void request(Params params) {
+            // TODO
+            System.out.println("Action 1 - requested");
+        }
+
             //TODO
             System.out.println("Action 1 - requested");
         }
@@ -19,9 +22,19 @@ public enum Action {
     ACTION_2 {
         @Override
         public void request(Params params) {
-            //TODO
+            // TODO
             System.out.println("Action 2 - requested");
         }
+
+    },
+
+    KubernetesChangeResourcesOfContainerWithinDeploymentAction {
+        @Override
+        public void request(Params params) {
+            // TODO
+            System.out.println("Action 2 - requested");
+        }
+
     },
     ;
 

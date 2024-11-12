@@ -1,5 +1,6 @@
 package agh.edu.hermes.storages;
 
+import agh.edu.hermes.checker.SlaViolationChecker;
 import agh.edu.hermes.types.PolicyRule;
 import agh.edu.hermes.types.base.Rule;
 
@@ -39,6 +40,9 @@ public class Policies {
     }
 
     public boolean addRule(PolicyRule rule){
+        if(SlaViolationChecker.checkRule(rule)){
+            return false;
+        }
         if(checkUniqueId(rule.id)){
             this.rules.add(rule);
             return true;

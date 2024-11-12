@@ -12,7 +12,7 @@ public class SlaService {
 
     public boolean addRuleToSla(SlaRule rule){
         Sla sla = Sla.getInstance();
-        if(SlaViolationChecker.checkRule(rule)){
+        if(!SlaViolationChecker.checkRule(rule)){
             return sla.addRule(rule);
         }
         return false;
