@@ -7,7 +7,6 @@ public enum Action {
         public void request(Params params) {
             System.out.println("Default action - requested");
         }
-
     },
     ACTION_1 {
         @Override
@@ -16,6 +15,9 @@ public enum Action {
             System.out.println("Action 1 - requested");
         }
 
+            //TODO
+            System.out.println("Action 1 - requested");
+        }
     },
     ACTION_2 {
         @Override
@@ -33,10 +35,8 @@ public enum Action {
             System.out.println("Action 2 - requested");
         }
 
-
     },
     ;
 
     public abstract void request(Params params);
-
 }
