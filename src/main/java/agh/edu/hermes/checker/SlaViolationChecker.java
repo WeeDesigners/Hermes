@@ -9,20 +9,24 @@ import java.util.List;
 
 public class SlaViolationChecker {
 
+  /*
+  True - if any of the rules violates SLA
+  False - if none of the rule violates SLA
+   */
   public static boolean checkRules(List<Rule> rules) {
     for (Rule rule : rules) {
-      if (!checkRule(rule)) {
-        return false;
+      if (checkRule(rule)) {
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
+  /*
+  True - if rule violates SLA
+  False - if rule does not violate SLA
+  */
   public static boolean checkRule(Rule rule) {
-    //TODO
-    if(true){
-      return true;
-    }
     Sla sla = Sla.getInstance();
     for (Rule slaRule : sla.getRules()) {
       if (slaRule.subject == rule.subject && slaRule.attribute == rule.attribute) {
