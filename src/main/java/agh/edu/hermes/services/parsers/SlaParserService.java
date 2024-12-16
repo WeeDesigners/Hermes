@@ -1,7 +1,6 @@
 package agh.edu.hermes.services.parsers;
 
-import agh.edu.hermes.storages.Sla;
-import agh.edu.hermes.types.attributes.SlaType;
+import agh.edu.hermes.types.Sla;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;

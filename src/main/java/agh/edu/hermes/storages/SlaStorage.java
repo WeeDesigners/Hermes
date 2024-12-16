@@ -1,5 +1,7 @@
 package agh.edu.hermes.storages;
 
+import agh.edu.hermes.types.Sla;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -34,7 +34,7 @@ public class PolicyRulesController {
         return "Rule not added";
     }
 
-    @GetMapping("/{id}/get")
+    @GetMapping("/{id}")
     public PolicyRule getRuleObject(@PathVariable("id") long id) {
         return ruleService.getRuleObject(id);
     }

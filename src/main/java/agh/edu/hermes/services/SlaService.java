@@ -1,18 +1,15 @@
 package agh.edu.hermes.services;
 
 
-import agh.edu.hermes.checker.SlaViolationChecker;
 import agh.edu.hermes.services.parsers.SlaParserService;
 import agh.edu.hermes.storages.RuleStorage;
-import agh.edu.hermes.storages.Sla;
+import agh.edu.hermes.types.Sla;
 import agh.edu.hermes.storages.SlaStorage;
 import agh.edu.hermes.types.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SlaService {

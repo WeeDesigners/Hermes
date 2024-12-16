@@ -2,7 +2,6 @@ package agh.edu.hermes.checker;
 
 
 import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.storages.Sla;
 
 import java.util.List;
 

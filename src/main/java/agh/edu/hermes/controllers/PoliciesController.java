@@ -33,7 +33,7 @@ public class PoliciesController {
         return "Rule id=" + id + " is not removed from policies";
     }
 
-    @GetMapping("/get")
+    @GetMapping("")
     public Policies getPoliciesObject(){
         return policiesService.getPolicies();
     }

@@ -1,7 +1,7 @@
 package agh.edu.hermes.controllers;
 
 import agh.edu.hermes.services.SlaService;
-import agh.edu.hermes.storages.Sla;
+import agh.edu.hermes.types.Sla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +44,7 @@ public class SlaController {
         return "Rule id=" + ruleId + " is not removed from SLA " + slaId;
     }
 
-    @DeleteMapping("/{sla_id}/remove")
+    @DeleteMapping("/{sla_id}")
     public String removeSla(@PathVariable("sla_id") long id){
         if(slaService.removeSlaById(id)) {
             return "Sla id=" + id + " is removed.";
@@ -52,7 +52,7 @@ public class SlaController {
         return "Sla id=" + id + " is not removed.";
     }
 
-    @GetMapping("/{sla_id}/get")
+    @GetMapping("/{sla_id}")
     public Sla getSlaObject(@PathVariable("sla_id") long id) {
         return slaService.getSla(id);
     }
@@ -66,7 +66,7 @@ public class SlaController {
         return slaString;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("")
     public List<Sla> getSlaList() {
         return slaService.getSlaList();
     }

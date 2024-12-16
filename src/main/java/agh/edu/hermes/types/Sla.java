@@ -1,8 +1,7 @@
-package agh.edu.hermes.storages;
+package agh.edu.hermes.types;
 
 
 import agh.edu.hermes.generators.IdGenerator;
-import agh.edu.hermes.types.SlaRule;
 import agh.edu.hermes.types.attributes.SlaType;
 
 import java.util.ArrayList;

@@ -34,7 +34,7 @@ public class SlaRulesController {
         return "Rule not added";
     }
 
-    @GetMapping("/{id}/get")
+    @GetMapping("/{id}")
     public SlaRule getRuleObject(@PathVariable("id") long id) {
         return ruleService.getRuleObject(id);
     }
