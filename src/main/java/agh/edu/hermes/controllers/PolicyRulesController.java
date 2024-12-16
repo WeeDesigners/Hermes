@@ -1,25 +1,26 @@
 package agh.edu.hermes.controllers;
 
 
-import agh.edu.hermes.services.RuleService;
+import agh.edu.hermes.services.PolicyRuleService;
+import agh.edu.hermes.services.SlaRuleService;
+import agh.edu.hermes.types.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import agh.edu.hermes.types.base.Rule;
 
 @RestController
-@RequestMapping("/rules")
-public class RulesController {
+@RequestMapping("/rules/policy")
+public class PolicyRulesController {
 
-    private final RuleService ruleService;
+    private final PolicyRuleService ruleService;
 
     @Autowired
-    public RulesController(RuleService ruleService) {
+    public PolicyRulesController(PolicyRuleService ruleService) {
         this.ruleService = ruleService;
     }
 
     @PostMapping("/addRuleObject")
-    public String addRule(@RequestBody Rule rule) {
+    public String addRule(@RequestBody PolicyRule rule) {
         if(ruleService.addRuleObject(rule)){
             return "Rule added successfully";
         }
@@ -35,7 +36,7 @@ public class RulesController {
     }
 
     @GetMapping("/getRuleObject/{id}")
-    public Rule getRuleObject(@PathVariable("id") long id) {
+    public PolicyRule getRuleObject(@PathVariable("id") long id) {
         return ruleService.getRuleObject(id);
     }
 

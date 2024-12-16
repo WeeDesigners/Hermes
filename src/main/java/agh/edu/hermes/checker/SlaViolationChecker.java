@@ -1,8 +1,9 @@
 package agh.edu.hermes.checker;
 
 
+import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.types.SlaRule;
 import agh.edu.hermes.types.attributes.RelationType;
-import agh.edu.hermes.types.base.Rule;
 import agh.edu.hermes.storages.Sla;
 
 import java.util.List;
@@ -13,8 +14,8 @@ public class SlaViolationChecker {
   True - if any of the rules violates SLA
   False - if none of the rule violates SLA
    */
-  public static boolean checkRules(List<Rule> rules) {
-    for (Rule rule : rules) {
+  public static boolean checkRules(List<PolicyRule> rules) {
+    for (PolicyRule rule : rules) {
       if (checkRule(rule)) {
         return true;
       }
@@ -26,50 +27,50 @@ public class SlaViolationChecker {
   True - if rule violates SLA
   False - if rule does not violate SLA
   */
-  public static boolean checkRule(Rule rule) {
+  public static boolean checkRule(PolicyRule rule) {
     Sla sla = Sla.getInstance();
-    for (Rule slaRule : sla.getRules()) {
-      if (slaRule.subject == rule.subject && slaRule.attribute == rule.attribute) {
-        if (slaRule.unit != rule.unit) {
-          throw new IllegalArgumentException();
-        }
-        if (slaRule.relation == RelationType.EQ || rule.relation == RelationType.EQ) {
-          if (slaRule.relation == RelationType.EQ && rule.relation == RelationType.EQ) {
-            RelationType action = slaRule.relation;
-            if (!action.apply(slaRule.value, rule.value.get(0))) {
-              return true;
-            }
-          } else {
-            return true;
-          }
-        } else if (slaRule.relation == RelationType.BT && rule.relation == RelationType.BT) {
-          if (!isBetween(slaRule.value, rule.value)) {
-            return true;
-          }
-        } else if (slaRule.relation == RelationType.BT) {
-          RelationType action = rule.relation;
-          Number n1 = slaRule.value.get(0);
-          Number n2 = slaRule.value.get(1);
-          if (!(action.apply(rule.value, n1) || action.apply(rule.value, n2))) {
-            return true;
-          }
-        } else if (rule.relation == RelationType.BT) {
-          RelationType action = slaRule.relation;
-          Number n1 = rule.value.get(0);
-          Number n2 = rule.value.get(1);
-          if (!(action.apply(slaRule.value, n1) && action.apply(slaRule.value, n2))) {
-            return true;
-          }
-        } else if (slaRule.relation != rule.relation) {
-          return true;
-        } else {
-          RelationType action = slaRule.relation;
-          if (action.apply(slaRule.value, rule.value.get(0))) {
-            return true;
-          }
-        }
-      }
-    }
+//    for (SlaRule slaRule : sla.getRules()) {
+//      if (slaRule.subject == rule.subject && slaRule.attribute == rule.attribute) {
+//        if (slaRule.unit != rule.unit) {
+//          throw new IllegalArgumentException();
+//        }
+//        if (slaRule.relation == RelationType.EQ || rule.relation == RelationType.EQ) {
+//          if (slaRule.relation == RelationType.EQ && rule.relation == RelationType.EQ) {
+//            RelationType action = slaRule.relation;
+//            if (!action.apply(slaRule.value, rule.value.get(0))) {
+//              return true;
+//            }
+//          } else {
+//            return true;
+//          }
+//        } else if (slaRule.relation == RelationType.BT && rule.relation == RelationType.BT) {
+//          if (!isBetween(slaRule.value, rule.value)) {
+//            return true;
+//          }
+//        } else if (slaRule.relation == RelationType.BT) {
+//          RelationType action = rule.relation;
+//          Number n1 = slaRule.value.get(0);
+//          Number n2 = slaRule.value.get(1);
+//          if (!(action.apply(rule.value, n1) || action.apply(rule.value, n2))) {
+//            return true;
+//          }
+//        } else if (rule.relation == RelationType.BT) {
+//          RelationType action = slaRule.relation;
+//          Number n1 = rule.value.get(0);
+//          Number n2 = rule.value.get(1);
+//          if (!(action.apply(slaRule.value, n1) && action.apply(slaRule.value, n2))) {
+//            return true;
+//          }
+//        } else if (slaRule.relation != rule.relation) {
+//          return true;
+//        } else {
+//          RelationType action = slaRule.relation;
+//          if (action.apply(slaRule.value, rule.value.get(0))) {
+//            return true;
+//          }
+//        }
+//      }
+//    }
     return false;
   }
 

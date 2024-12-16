@@ -39,10 +39,9 @@ public class Policies {
     }
 
     public boolean addRule(PolicyRule rule){
-        //TODO
-//        if(SlaViolationChecker.checkRule(rule)){
-//            return false;
-//        }
+        if(SlaViolationChecker.checkRule(rule)){
+            return false;
+        }
         if(checkUniqueId(rule.id)){
             this.rules.add(rule);
             return true;
