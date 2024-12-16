@@ -69,10 +69,6 @@ public class Sla {
         this.slaRules.clear();
     }
 
-    public void clearSla(){
-        removeRules();
-    }
-
     public List<SlaRule> getRules() {
         return new ArrayList<>(slaRules);
     }

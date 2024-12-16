@@ -60,11 +60,9 @@ public class Policies {
         return null;
     }
 
-
     public List<PolicyRule> getRules() {
         return new ArrayList<>(rules);
     }
-
 
     @Override
     public String toString() {
