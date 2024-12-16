@@ -5,6 +5,7 @@ import agh.edu.hermes.checker.SlaViolationChecker;
 import agh.edu.hermes.services.parsers.SlaParserService;
 import agh.edu.hermes.storages.RuleStorage;
 import agh.edu.hermes.storages.Sla;
+import agh.edu.hermes.storages.SlaStorage;
 import agh.edu.hermes.types.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,40 +20,47 @@ public class SlaService {
         this.slaParserService = slaParserService;
     }
 
-    public boolean addRuleToSla(SlaRule rule){
-        Sla sla = Sla.getInstance();
-        //TODO (or TODELETE)
-        if(!SlaViolationChecker.checkRule(null)){
-            return sla.addRule(rule);
-        }
-        return false;
-    }
-
-    public boolean initializeSla(String slaString){
-        return slaParserService.parseSlaString(slaString);
-    }
-
-    public boolean addRuleToSlaById(long id){
-        RuleStorage rs = RuleStorage.getInstance();
-        SlaRule rule = rs.getSlaRule(id);
-        if(rule == null){
+    public boolean create(String slaString){
+        Sla sla = slaParserService.parseSlaString(slaString);
+        if(sla == null){
             return false;
         }
-        return addRuleToSla(rule);
+        SlaStorage ss = SlaStorage.getInstance();
+        ss.addSla(sla);
+        return true;
     }
 
-    public boolean removeRuleFromSla(long id){
-        Sla sla = Sla.getInstance();
-        SlaRule removed = sla.removeRule(id);
+    public boolean addRuleToSlaById(long slaId, long ruleId){
+        RuleStorage rs = RuleStorage.getInstance();
+        SlaStorage ss = SlaStorage.getInstance();
+
+        SlaRule rule = rs.getSlaRule(ruleId);
+        Sla sla = ss.getSlaById(slaId);
+
+        if(rule == null || sla == null){
+            return false;
+        }
+        return sla.addRule(rule);
+    }
+
+    public boolean removeRuleFromSla(long slaId, long ruleId){
+        SlaStorage ss = SlaStorage.getInstance();
+        Sla sla = ss.getSlaById(slaId);
+        SlaRule removed = sla.removeRule(ruleId);
         return (removed != null);
     }
 
-    public Sla getSla(){
-        return Sla.getInstance();
+    public Sla getSla(long id){
+        return SlaStorage.getInstance().getSlaById(id);
     }
 
-    public String getSlaString(){
-        return slaParserService.slaToJson(Sla.getInstance());
+    public boolean removeSlaById(long id){
+        SlaStorage ss = SlaStorage.getInstance();
+        return (ss.removeSlaById(id) != null);
+    }
+
+    public String getSlaString(long id){
+        return SlaStorage.getInstance().getSlaById(id).toString();
     }
 
 }

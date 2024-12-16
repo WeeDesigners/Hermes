@@ -13,6 +13,4 @@ public class Action {
         this.params = params;
     }
 
-
-
 }

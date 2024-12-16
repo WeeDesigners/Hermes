@@ -14,13 +14,13 @@ public class SlaRule {
     public List<Condition> conditions;
 
     public SlaRule(){
-        id = IdGenerator.getRuleId();
+        id = IdGenerator.getNextId();
         valueType = null;
         conditions = new ArrayList<>();
     }
 
     public SlaRule(ValueType valueType) {
-        this.id = IdGenerator.getRuleId();
+        this.id = IdGenerator.getNextId();
         this.valueType = valueType;
         this.conditions = new ArrayList<>();
     }

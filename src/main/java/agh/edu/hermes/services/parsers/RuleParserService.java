@@ -1,6 +1,5 @@
 package agh.edu.hermes.services.parsers;
 
-import agh.edu.hermes.storages.Sla;
 import agh.edu.hermes.types.PolicyRule;
 import agh.edu.hermes.types.SlaRule;
 import com.google.gson.Gson;

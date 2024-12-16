@@ -26,7 +26,7 @@ public class SlaViolationChecker {
   False - if rule does not violate SLA
   */
   public static boolean checkRule(PolicyRule rule) {
-    Sla sla = Sla.getInstance();
+//    Sla sla = Sla.getInstance();
 //    for (SlaRule slaRule : sla.getRules()) {
 //      if (slaRule.subject == rule.subject && slaRule.attribute == rule.attribute) {
 //        if (slaRule.unit != rule.unit) {

@@ -15,18 +15,9 @@ public class SlaParserService {
         this.gson = new Gson();
     }
 
-    public boolean parseSlaString(String slaJson) {
+    public Sla parseSlaString(String slaJson) {
         JsonObject jsonObject = gson.fromJson(slaJson, JsonObject.class);
-        if (!jsonObject.has("type")) return false;
-        if (!jsonObject.has("clientId")) return false;
-        if(!jsonObject.has("applicationId")) return false;
-
-        Sla sla = Sla.getInstance();
-        sla.setType(SlaType.valueOf(jsonObject.get("type").getAsString()));
-        sla.setClientId(jsonObject.get("clientId").getAsString());
-        sla.setApplicationId(jsonObject.get("applicationId").getAsString());
-
-        return true;
+        return gson.fromJson(jsonObject, Sla.class);
     }
 
     public String slaToJson(Sla sla) {

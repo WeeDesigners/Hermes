@@ -16,37 +16,47 @@ public class SlaController {
         this.slaService = slaService;
     }
 
-    @PostMapping("/setProperties")
+    @PostMapping("/create")
     public String setSlaProperties(@RequestBody String slaString) {
-        if(slaService.initializeSla(slaString)) {
-            return "Successfully set sla properties";
+        if(slaService.create(slaString)) {
+            return "Successfully created SLA";
         }
-        return "Sla properties could not be set";
+        return "Sla cannot be created";
     }
 
-    @PostMapping("/add/{id}")
-    public String addRuleToSla(@PathVariable("id") long id){
-        if(slaService.addRuleToSlaById(id)){
-            return "Rule id=" + id + " added successfully to SLA";
+
+
+    @PostMapping("/{sla_id}/add/{rule_id}")
+    public String addRuleToSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId) {
+        if(slaService.addRuleToSlaById(slaId, ruleId)) {
+            return "Rule id=" + ruleId + " added successfully to SLA " + slaId;
         }
-        return "Rule id=" + id + " not added to SLA";
+        return "Rule id=" + ruleId + " not added to SLA " + slaId;
     }
 
-    @DeleteMapping("/remove/{id}")
-    public String removeRuleFromSla(@PathVariable("id") long id){
-        if(slaService.removeRuleFromSla(id)){
-            return "Rule id=" + id + " is removed from SLA";
+    @DeleteMapping("/{sla_id}/remove/{rule_id}")
+    public String removeRuleFromSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId){
+        if(slaService.removeRuleFromSla(slaId, ruleId)) {
+            return "Rule id=" + ruleId + " is removed from SLA " + slaId;
         }
-        return "Rule id=" + id + " is not removed from SLA";
+        return "Rule id=" + ruleId + " is not removed from SLA " + slaId;
     }
 
-    @GetMapping("/get")
-    public Sla getSlaObject(){
-        return slaService.getSla();
+    @DeleteMapping("/{sla_id}/remove")
+    public String removeSla(@PathVariable("sla_id") long id){
+        if(slaService.removeSlaById(id)) {
+            return "Sla id=" + id + " is removed.";
+        }
+        return "Sla id=" + id + " is not removed.";
     }
 
-    @GetMapping("/getString")
-    public String getSlaString(){
-        return slaService.getSlaString();
+    @GetMapping("/{sla_id}/get")
+    public Sla getSlaObject(@PathVariable("sla_id") long id) {
+        return slaService.getSla(id);
+    }
+
+    @GetMapping("/{sla_id}/getString")
+    public String getSlaString(@PathVariable("sla_id") long id) {
+        return slaService.getSlaString(id);
     }
 }

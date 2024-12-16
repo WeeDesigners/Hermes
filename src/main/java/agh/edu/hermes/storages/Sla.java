@@ -1,8 +1,9 @@
 package agh.edu.hermes.storages;
 
 
-import agh.edu.hermes.types.attributes.SlaType;
+import agh.edu.hermes.generators.IdGenerator;
 import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.types.attributes.SlaType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,21 +11,35 @@ import java.util.List;
 
 public class Sla {
 
-
-    private SlaType type;
-    private String clientId;
-    private String applicationId;
+    public final long id;
+    public final SlaType type;
+    public final String clientId;
+    public final String applicationId;
     private final List<SlaRule> slaRules;
 
 
-    private static final Sla instance = new Sla();
-
-    private Sla() {
+    public Sla() {
+        this.id = IdGenerator.getNextId();
+        this.type = null;
+        this.clientId = null;
+        this.applicationId = null;
         this.slaRules = new ArrayList<>();
     }
 
-    public static Sla getInstance() {
-        return instance;
+    public Sla(SlaType type, String clientId, String applicationId) {
+        this.id = IdGenerator.getNextId();
+        this.type = type;
+        this.clientId = clientId;
+        this.applicationId = applicationId;
+        this.slaRules = new ArrayList<>();
+    }
+
+    public Sla(SlaType type, String clientId, String applicationId, List<SlaRule> slaRules) {
+        this.id = IdGenerator.getNextId();
+        this.type = type;
+        this.clientId = clientId;
+        this.applicationId = applicationId;
+        this.slaRules = slaRules;
     }
 
     private boolean checkUniqueId(long id){
@@ -80,29 +95,5 @@ public class Sla {
         return "\n====================================\n Rules:\n"
                 + slaRules
                 + "\n====================================\n";
-    }
-
-    public SlaType getType() {
-        return type;
-    }
-
-    public void setType(SlaType type) {
-        this.type = type;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
     }
 }

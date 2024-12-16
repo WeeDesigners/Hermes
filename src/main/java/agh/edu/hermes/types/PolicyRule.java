@@ -15,14 +15,14 @@ public class PolicyRule {
     public final Action action;
 
     public PolicyRule() {
-        this.id = IdGenerator.getRuleId();
+        this.id = IdGenerator.getNextId();
         this.name = null;
         this.conditions = new ArrayList<>();
         this.action = null;
     }
 
     public PolicyRule(String name, Action action) {
-        this.id = IdGenerator.getRuleId();
+        this.id = IdGenerator.getNextId();
         this.name = name;
         this.conditions = new ArrayList<>();
         this.action = action;
