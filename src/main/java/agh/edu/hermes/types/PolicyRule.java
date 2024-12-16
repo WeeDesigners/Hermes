@@ -14,6 +14,13 @@ public class PolicyRule {
     private final List<Condition> conditions;
     public final Action action;
 
+    public PolicyRule() {
+        this.id = IdGenerator.getRuleId();
+        this.name = null;
+        this.conditions = new ArrayList<>();
+        this.action = null;
+    }
+
     public PolicyRule(String name, Action action) {
         this.id = IdGenerator.getRuleId();
         this.name = name;

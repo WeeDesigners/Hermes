@@ -16,6 +16,14 @@ public class SlaController {
         this.slaService = slaService;
     }
 
+    @PostMapping("/setProperties")
+    public String setSlaProperties(@RequestBody String slaString) {
+        if(slaService.initializeSla(slaString)) {
+            return "Successfully set sla properties";
+        }
+        return "Sla properties could not be set";
+    }
+
     @PostMapping("/add/{id}")
     public String addRuleToSla(@PathVariable("id") long id){
         if(slaService.addRuleToSlaById(id)){
@@ -35,5 +43,10 @@ public class SlaController {
     @GetMapping("/get")
     public Sla getSlaObject(){
         return slaService.getSla();
+    }
+
+    @GetMapping("/getString")
+    public String getSlaString(){
+        return slaService.getSlaString();
     }
 }

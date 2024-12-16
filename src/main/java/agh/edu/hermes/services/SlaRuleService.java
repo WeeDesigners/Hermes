@@ -23,7 +23,6 @@ public class SlaRuleService {
 
     public boolean addRuleString(String ruleString){
         SlaRule rule = ruleParserService.parseSlaRuleStringToObject(ruleString);
-        System.out.println(rule);
         if(rule == null) {
             return false;
         }
