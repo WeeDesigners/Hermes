@@ -92,7 +92,12 @@ public class Sla {
     @Override
     public String toString() {
         //TODO -> better concat
-        return "\n====================================\n Rules:\n"
+        return "\n====================================\n"
+                + "id: " + id + "\n"
+                + "type: " + type + "\n"
+                + "clientId: " + clientId + "\n"
+                + "applicationId: " + applicationId + "\n"
+                + "slaRules:\n"
                 + slaRules
                 + "\n====================================\n";
     }

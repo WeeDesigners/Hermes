@@ -10,6 +10,10 @@ import agh.edu.hermes.types.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class SlaService {
 
@@ -60,7 +64,15 @@ public class SlaService {
     }
 
     public String getSlaString(long id){
-        return SlaStorage.getInstance().getSlaById(id).toString();
+        Sla sla = SlaStorage.getInstance().getSlaById(id);
+        if(sla == null){
+            return null;
+        }
+        return sla.toString();
+    }
+
+    public List<Sla> getSlaList(){
+        return SlaStorage.getInstance().getSlas();
     }
 
 }

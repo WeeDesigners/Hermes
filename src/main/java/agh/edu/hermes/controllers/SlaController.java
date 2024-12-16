@@ -5,6 +5,8 @@ import agh.edu.hermes.storages.Sla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/sla")
 public class SlaController {
@@ -57,6 +59,16 @@ public class SlaController {
 
     @GetMapping("/{sla_id}/getString")
     public String getSlaString(@PathVariable("sla_id") long id) {
-        return slaService.getSlaString(id);
+        String slaString = slaService.getSlaString(id);
+        if(slaString == null) {
+            return "Sla id=" + id + " is not found.";
+        }
+        return slaString;
     }
+
+    @GetMapping("/getAll")
+    public List<Sla> getSlaList() {
+        return slaService.getSlaList();
+    }
+
 }
