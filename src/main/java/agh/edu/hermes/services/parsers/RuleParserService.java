@@ -1,7 +1,6 @@
 package agh.edu.hermes.services.parsers;
 
 import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.types.base.Rule;
 import agh.edu.hermes.types.SlaRule;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -16,16 +15,22 @@ public class RuleParserService {
         gson = new Gson();
     }
 
-    public String parseRuleObjectToString(Rule rule){
+    public String parseSlaRuleObjectToString(SlaRule rule){
         return gson.toJson(rule);
     }
 
-    public Rule parseRuleStringToObject(String ruleString){
+    public String parsePolicyRuleObjectToString(PolicyRule rule){
+        return gson.toJson(rule);
+    }
+
+    public SlaRule parseSlaRuleStringToObject(String ruleString){
         JsonObject jsonObject = gson.fromJson(ruleString, JsonObject.class);
-        if(jsonObject.has("action")){
-            return gson.fromJson(jsonObject, PolicyRule.class);
-        }
         return gson.fromJson(jsonObject, SlaRule.class);
+    }
+
+    public PolicyRule parsePolicyRuleStringToObject(String ruleString){
+        JsonObject jsonObject = gson.fromJson(ruleString, JsonObject.class);
+        return gson.fromJson(jsonObject, PolicyRule.class);
     }
 
 }

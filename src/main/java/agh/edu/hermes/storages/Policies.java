@@ -10,6 +10,7 @@ public class Policies {
 
     private final List<PolicyRule> rules;
 
+
     private final static Policies instance = new Policies();
 
     private Policies() {

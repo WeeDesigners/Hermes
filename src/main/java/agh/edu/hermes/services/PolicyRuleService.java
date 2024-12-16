@@ -3,7 +3,6 @@ package agh.edu.hermes.services;
 import agh.edu.hermes.services.parsers.RuleParserService;
 import agh.edu.hermes.storages.RuleStorage;
 import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.types.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class PolicyRuleService {
     }
 
     public boolean addRuleString(String ruleString){
-        PolicyRule rule = ruleParserService.parseRuleStringToObject(ruleString);
+        PolicyRule rule = ruleParserService.parsePolicyRuleStringToObject(ruleString);
         if(rule == null) {
             return false;
         }
@@ -40,6 +39,6 @@ public class PolicyRuleService {
         if(rule == null) {
             return "";
         }
-        return ruleParserService.parseRuleObjectToString(rule);
+        return ruleParserService.parsePolicyRuleObjectToString(rule);
     }
 }

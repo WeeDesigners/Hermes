@@ -2,7 +2,6 @@ package agh.edu.hermes.storages;
 
 
 import agh.edu.hermes.types.attributes.SlaType;
-import agh.edu.hermes.types.base.Rule;
 import agh.edu.hermes.types.SlaRule;
 
 import java.util.ArrayList;

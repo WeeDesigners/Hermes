@@ -22,7 +22,7 @@ public class SlaRuleService {
     }
 
     public boolean addRuleString(String ruleString){
-        SlaRule rule = ruleParserService.parseRuleStringToObject(ruleString);
+        SlaRule rule = ruleParserService.parseSlaRuleStringToObject(ruleString);
         if(rule == null) {
             return false;
         }
@@ -39,6 +39,6 @@ public class SlaRuleService {
         if(rule == null) {
             return "";
         }
-        return ruleParserService.parseRuleObjectToString(rule);
+        return ruleParserService.parseSlaRuleObjectToString(rule);
     }
 }

@@ -3,9 +3,7 @@ package agh.edu.hermes.controllers;
 
 import agh.edu.hermes.services.PoliciesService;
 import agh.edu.hermes.storages.Policies;
-import agh.edu.hermes.storages.Sla;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

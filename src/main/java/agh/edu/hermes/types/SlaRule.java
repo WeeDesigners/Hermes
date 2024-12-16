@@ -10,12 +10,6 @@ public class SlaRule {
     public final ValueType valueType;
     public final Condition condition;
 
-    public SlaRule() {
-        this.id = IdGenerator.getRuleId();
-        this.valueType = null;
-        this.condition = null;
-    }
-
     public SlaRule(ValueType valueType, Condition condition) {
         this.id = IdGenerator.getRuleId();
         this.valueType = valueType;
