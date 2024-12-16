@@ -10,8 +10,14 @@ import java.util.List;
 public class SlaRule {
 
     public final long id;
-    public final ValueType valueType;
-    private final List<Condition> conditions;
+    public ValueType valueType;
+    public List<Condition> conditions;
+
+    public SlaRule(){
+        id = IdGenerator.getRuleId();
+        valueType = null;
+        conditions = new ArrayList<>();
+    }
 
     public SlaRule(ValueType valueType) {
         this.id = IdGenerator.getRuleId();
@@ -38,6 +44,11 @@ public class SlaRule {
 
     public void clearConditions() {
         this.conditions.clear();
+    }
+
+    @Override
+    public String toString() {
+        return "{" + id + ", " + valueType + ", " + conditions + "}";
     }
 
 }

@@ -11,4 +11,9 @@ public class Condition {
         this.relation = relation;
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "{" + metric + ", " + relation + ", " + value + "}";
+    }
 }
