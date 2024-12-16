@@ -2,7 +2,6 @@ package agh.edu.hermes.storages;
 
 import agh.edu.hermes.checker.SlaViolationChecker;
 import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.types.base.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class Policies {
     }
 
     private boolean checkUniqueId(long id){
-        for(Rule rule : rules){
+        for(PolicyRule rule : rules){
             if(rule.id == id){
                 return false;
             }
@@ -40,9 +39,10 @@ public class Policies {
     }
 
     public boolean addRule(PolicyRule rule){
-        if(SlaViolationChecker.checkRule(rule)){
-            return false;
-        }
+        //TODO
+//        if(SlaViolationChecker.checkRule(rule)){
+//            return false;
+//        }
         if(checkUniqueId(rule.id)){
             this.rules.add(rule);
             return true;

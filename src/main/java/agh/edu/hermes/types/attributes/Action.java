@@ -1,38 +1,18 @@
 package agh.edu.hermes.types.attributes;
 
 
-public enum Action {
-    DEFAULT {
-        @Override
-        public void request(Params params) {
-            System.out.println("Default action - requested");
-        }
-    },
-    ACTION_1 {
-        @Override
-        public void request(Params params) {
-            // TODO
-            System.out.println("Action 1 - requested");
-        }
-    },
-    ACTION_2 {
-        @Override
-        public void request(Params params) {
-            // TODO
-            System.out.println("Action 2 - requested");
-        }
+public class Action {
 
-    },
+    public final String collectionName;
+    public final String actionName;
+    public final Params params;
 
-    KubernetesChangeResourcesOfContainerWithinDeploymentAction {
-        @Override
-        public void request(Params params) {
-            // TODO
-            System.out.println("Action 2 - requested");
-        }
+    public Action(String collectionName, String actionName, Params params) {
+        this.collectionName = collectionName;
+        this.actionName = actionName;
+        this.params = params;
+    }
 
-    },
-    ;
 
-    public abstract void request(Params params);
+
 }

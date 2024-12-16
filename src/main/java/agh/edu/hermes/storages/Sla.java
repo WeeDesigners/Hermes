@@ -1,6 +1,7 @@
 package agh.edu.hermes.storages;
 
 
+import agh.edu.hermes.types.attributes.SlaType;
 import agh.edu.hermes.types.base.Rule;
 import agh.edu.hermes.types.SlaRule;
 
@@ -10,12 +11,17 @@ import java.util.List;
 
 public class Sla {
 
-    private final List<SlaRule> rules;
+
+    private SlaType type;
+    private String clientId;
+    private String applicationId;
+    private final List<SlaRule> slaRules;
+
 
     private static final Sla instance = new Sla();
 
     private Sla() {
-        this.rules = new ArrayList<>();
+        this.slaRules = new ArrayList<>();
     }
 
     public static Sla getInstance() {
@@ -23,7 +29,7 @@ public class Sla {
     }
 
     private boolean checkUniqueId(long id){
-        for(Rule rule : rules){
+        for(SlaRule rule : slaRules){
             if(rule.id == id){
                 return false;
             }
@@ -45,15 +51,15 @@ public class Sla {
             return false;
         }
         else {
-            this.rules.add(rule);
+            this.slaRules.add(rule);
         }
         return true;
     }
 
     public SlaRule removeRule(long id){
-        for(SlaRule rule : rules){
+        for(SlaRule rule : slaRules){
             if(rule.id == id){
-                rules.remove(rule);
+                slaRules.remove(rule);
                 return rule;
             }
         }
@@ -61,7 +67,7 @@ public class Sla {
     }
 
     public void removeRules(){
-        this.rules.clear();
+        this.slaRules.clear();
     }
 
     public void clearSla(){
@@ -69,7 +75,7 @@ public class Sla {
     }
 
     public List<SlaRule> getRules() {
-        return new ArrayList<>(rules);
+        return new ArrayList<>(slaRules);
     }
 
 
@@ -77,8 +83,31 @@ public class Sla {
     public String toString() {
         //TODO -> better concat
         return "\n====================================\n Rules:\n"
-                + rules
+                + slaRules
                 + "\n====================================\n";
     }
 
+    public SlaType getType() {
+        return type;
+    }
+
+    public void setType(SlaType type) {
+        this.type = type;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 }

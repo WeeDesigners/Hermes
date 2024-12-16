@@ -1,6 +1,7 @@
 package agh.edu.hermes.storages;
 
-import agh.edu.hermes.types.base.Rule;
+import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.types.SlaRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,30 +10,45 @@ public class RuleStorage {
 
     private static final RuleStorage instance = new RuleStorage();
 
-    private final List<Rule> rules;
+    private final List<SlaRule> slaRules;
+    private final List<PolicyRule> policyRules;
 
     private RuleStorage() {
-        rules = new ArrayList<>();
+        slaRules = new ArrayList<>();
+        policyRules = new ArrayList<>();
     }
 
     public static RuleStorage getInstance() {
         return instance;
     }
 
-    public boolean addRule(Rule rule) {
-        if(getRule(rule.id) == null){
-            rules.add(rule);
+    public boolean addSlaRule(SlaRule rule) {
+        if(getSlaRule(rule.id) == null){
+            slaRules.add(rule);
             return true;
         }
         return false;
     }
 
-    public List<Rule> getRules() {
-        return new ArrayList<>(rules);
+    public boolean addPolicyRule(PolicyRule rule) {
+        if(getPolicyRule(rule.id) == null){
+            policyRules.add(rule);
+            return true;
+        }
+        return false;
     }
 
-    public Rule getRule(long id){
-        for(Rule rule : rules){
+    public SlaRule getSlaRule(long id){
+        for(SlaRule rule : slaRules){
+            if(rule.id == id){
+                return rule;
+            }
+        }
+        return null;
+    }
+
+    public PolicyRule getPolicyRule(long id){
+        for(PolicyRule rule : policyRules){
             if(rule.id == id){
                 return rule;
             }

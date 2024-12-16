@@ -1,6 +1,6 @@
 package agh.edu.hermes.types.attributes;
 
-public enum UnitType {
+public enum Metric {
     NUMBER,
     PERCENT,
     BYTE,

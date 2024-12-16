@@ -2,46 +2,41 @@ package agh.edu.hermes.types;
 
 import agh.edu.hermes.generators.IdGenerator;
 import agh.edu.hermes.types.attributes.*;
-import agh.edu.hermes.types.base.Rule;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
-public class PolicyRule extends Rule {
+public class PolicyRule {
 
+    public final long id;
+    public final String name;
+    public final Condition condition;
     public final Action action;
-    public Params params;
 
-    public PolicyRule(){
-        super();
-        this.action = null;
-        this.params = null;
-    }
-
-    public PolicyRule(RuleAttribute attribute, RuleSubject subject, List<Number> value, UnitType unit, RelationType relation, Action action, Params params) {
-        super(attribute, subject, value, unit, relation);
+    public PolicyRule(String name, Condition condition, Action action) {
+        this.id = IdGenerator.getRuleId();
+        this.name = name;
+        this.condition = condition;
         this.action = action;
-        this.params = params;
     }
 
     @Override
     public boolean equals(Object o) {
         PolicyRule rule = (PolicyRule) o;
         return super.equals(o)
-                && this.action == rule.action
-                && this.params.equals(rule.params);
+                && this.id == rule.id
+                && this.name.equals(rule.name)
+                && this.condition.equals(rule.condition)
+                && this.action.equals(rule.action);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(attribute, subject, value, unit, relation, action, params);
+        return Objects.hash(id, name, condition, action);
     }
 
     @Override
     public String toString() {
         // TODO -> better concat
-        return "{ " + id + ", " + attribute + ", " + subject + ", " + value + ", " + unit + ", "
-                + relation + ", " + action + ", " + params + " }";
+        return "{ " + id + ", " + name + ", " + condition + ", " + action + " }";
     }
 }
