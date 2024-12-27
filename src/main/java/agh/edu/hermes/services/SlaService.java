@@ -21,14 +21,14 @@ public class SlaService {
         this.slaParserService = slaParserService;
     }
 
-    public boolean create(String slaString){
+    public Sla create(String slaString){
         Sla sla = slaParserService.parseSlaString(slaString);
         if(sla == null){
-            return false;
+            return null;
         }
         SlaStorage ss = SlaStorage.getInstance();
         ss.addSla(sla);
-        return true;
+        return sla;
     }
 
     public boolean addRuleToSlaById(long slaId, long ruleId){

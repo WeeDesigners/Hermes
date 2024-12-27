@@ -1,10 +1,14 @@
 package agh.edu.hermes.controllers;
 
 import agh.edu.hermes.services.SlaService;
+import agh.edu.hermes.types.PolicyRule;
 import agh.edu.hermes.types.Sla;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,56 +23,54 @@ public class SlaController {
     }
 
     @PostMapping("/create")
-    public String setSlaProperties(@RequestBody String slaString) {
-        if(slaService.create(slaString)) {
-            return "Successfully created SLA";
+    public ResponseEntity<Sla> setSlaProperties(@RequestBody String slaString) {
+        Sla sla = slaService.create(slaString);
+        if(sla != null) {
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .replacePath("/sla/{id}")
+                    .buildAndExpand(sla.id)
+                    .toUri();
+            return ResponseEntity.created(location).body(sla);
         }
-        return "Sla cannot be created";
+        return ResponseEntity.badRequest().build();
     }
 
-
-
     @PostMapping("/{sla_id}/add/{rule_id}")
-    public String addRuleToSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId) {
+    public ResponseEntity<?> addRuleToSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId) {
         if(slaService.addRuleToSlaById(slaId, ruleId)) {
-            return "Rule id=" + ruleId + " added successfully to SLA " + slaId;
+            return ResponseEntity.ok().build();
         }
-        return "Rule id=" + ruleId + " not added to SLA " + slaId;
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{sla_id}/remove/{rule_id}")
-    public String removeRuleFromSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId){
+    public ResponseEntity<?> removeRuleFromSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId){
         if(slaService.removeRuleFromSla(slaId, ruleId)) {
-            return "Rule id=" + ruleId + " is removed from SLA " + slaId;
+            return ResponseEntity.ok().build();
         }
-        return "Rule id=" + ruleId + " is not removed from SLA " + slaId;
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{sla_id}")
-    public String removeSla(@PathVariable("sla_id") long id){
+    public ResponseEntity<?> removeSla(@PathVariable("sla_id") long id){
         if(slaService.removeSlaById(id)) {
-            return "Sla id=" + id + " is removed.";
+            return ResponseEntity.ok().build();
         }
-        return "Sla id=" + id + " is not removed.";
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{sla_id}")
-    public Sla getSlaObject(@PathVariable("sla_id") long id) {
-        return slaService.getSla(id);
-    }
-
-    @GetMapping("/{sla_id}/getString")
-    public String getSlaString(@PathVariable("sla_id") long id) {
-        String slaString = slaService.getSlaString(id);
-        if(slaString == null) {
-            return "Sla id=" + id + " is not found.";
+    public ResponseEntity<Sla> getSlaObject(@PathVariable("sla_id") long id) {
+        Sla sla = slaService.getSla(id);
+        if(sla == null){
+            return ResponseEntity.notFound().build();
         }
-        return slaString;
+        return ResponseEntity.ok(sla);
     }
 
     @GetMapping("")
-    public List<Sla> getSlaList() {
-        return slaService.getSlaList();
+    public ResponseEntity<List<Sla>> getSlaList() {
+        return ResponseEntity.ok(slaService.getSlaList());
     }
 
 }

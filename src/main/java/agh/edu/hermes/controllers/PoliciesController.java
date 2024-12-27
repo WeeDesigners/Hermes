@@ -4,6 +4,7 @@ package agh.edu.hermes.controllers;
 import agh.edu.hermes.services.PoliciesService;
 import agh.edu.hermes.storages.Policies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,24 +19,24 @@ public class PoliciesController {
     }
 
     @PostMapping("/add/{id}")
-    public String addRuleToPolicies(@PathVariable("id") long id){
+    public ResponseEntity<?> addRuleToPolicies(@PathVariable("id") long id){
         if(policiesService.addRuleToPoliciesById(id)){
-            return "Rule id=" + id + " added successfully to policies";
+            return ResponseEntity.ok().build();
         }
-        return "Rule id=" + id + " not added to policies";
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/remove/{id}")
-    public String removeRuleFromPolicies(@PathVariable("id") long id){
+    public ResponseEntity<?> removeRuleFromPolicies(@PathVariable("id") long id){
         if(policiesService.removeRuleFromPolicies(id)){
-            return "Rule id=" + id + " is removed from policies";
+            return ResponseEntity.ok().build();
         }
-        return "Rule id=" + id + " is not removed from policies";
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("")
-    public Policies getPoliciesObject(){
-        return policiesService.getPolicies();
+    public ResponseEntity<Policies> getPoliciesObject(){
+        return ResponseEntity.ok(policiesService.getPolicies());
     }
 
 }

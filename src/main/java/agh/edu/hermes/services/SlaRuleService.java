@@ -16,15 +16,15 @@ public class SlaRuleService {
         this.ruleParserService = ruleParserService;
     }
 
-    public boolean addRuleObject(SlaRule rule){
+    public SlaRule addRuleObject(SlaRule rule){
         RuleStorage rs = RuleStorage.getInstance();
         return rs.addSlaRule(rule);
     }
 
-    public boolean addRuleString(String ruleString){
+    public SlaRule addRuleString(String ruleString){
         SlaRule rule = ruleParserService.parseSlaRuleStringToObject(ruleString);
         if(rule == null) {
-            return false;
+            return null;
         }
         return addRuleObject(rule);
     }

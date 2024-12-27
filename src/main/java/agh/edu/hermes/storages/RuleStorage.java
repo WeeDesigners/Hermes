@@ -22,20 +22,20 @@ public class RuleStorage {
         return instance;
     }
 
-    public boolean addSlaRule(SlaRule rule) {
+    public SlaRule addSlaRule(SlaRule rule) {
         if(getSlaRule(rule.id) == null){
             slaRules.add(rule);
-            return true;
+            return rule;
         }
-        return false;
+        return null;
     }
 
-    public boolean addPolicyRule(PolicyRule rule) {
+    public PolicyRule addPolicyRule(PolicyRule rule) {
         if(getPolicyRule(rule.id) == null){
             policyRules.add(rule);
-            return true;
+            return rule;
         }
-        return false;
+        return null;
     }
 
     public SlaRule getSlaRule(long id){
