@@ -24,7 +24,7 @@ public class PolicyRulesController {
 
     @PostMapping("/addRuleObject")
     public ResponseEntity<PolicyRule> addRule(@RequestBody PolicyRule rule) {
-        if(ruleService.addRuleObject(rule)){
+        if(ruleService.addRuleObject(rule) != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/policy/{id}")
                     .buildAndExpand(rule.id)
@@ -35,25 +35,25 @@ public class PolicyRulesController {
     }
 
     @PostMapping("/addRuleString")
-    public String addRule(@RequestBody String ruleString) {
-        if(ruleService.addRuleString(ruleString)){
-            return "Rule added successfully";
+    public ResponseEntity<PolicyRule> addRule(@RequestBody String ruleString) {
+        PolicyRule rule = ruleService.addRuleString(ruleString);
+        if(rule != null){
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .replacePath("/rules/policy/{id}")
+                    .buildAndExpand(rule.id)
+                    .toUri();
+            return ResponseEntity.created(location).body(rule);
         }
-        return "Rule not added";
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{id}")
-    public PolicyRule getRuleObject(@PathVariable("id") long id) {
-        return ruleService.getRuleObject(id);
-    }
-
-    @GetMapping("/{id}/getString")
-    public String getRuleString(@PathVariable("id") long id) {
-        String result = ruleService.getRuleString(id);
-        if(result.isEmpty()){
-            return "Cannot get rule of id " + id + ".";
+    public ResponseEntity<PolicyRule> getRuleObject(@PathVariable("id") long id) {
+        PolicyRule rule = ruleService.getRuleObject(id);
+        if(rule == null){
+            return ResponseEntity.notFound().build();
         }
-        return result;
+        return ResponseEntity.ok(ruleService.getRuleObject(id));
     }
 
 }

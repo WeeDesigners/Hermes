@@ -16,15 +16,15 @@ public class PolicyRuleService {
         this.ruleParserService = ruleParserService;
     }
 
-    public boolean addRuleObject(PolicyRule rule){
+    public PolicyRule addRuleObject(PolicyRule rule){
         RuleStorage rs = RuleStorage.getInstance();
         return rs.addPolicyRule(rule);
     }
 
-    public boolean addRuleString(String ruleString){
+    public PolicyRule addRuleString(String ruleString){
         PolicyRule rule = ruleParserService.parsePolicyRuleStringToObject(ruleString);
         if(rule == null) {
-            return false;
+            return null;
         }
         return addRuleObject(rule);
     }

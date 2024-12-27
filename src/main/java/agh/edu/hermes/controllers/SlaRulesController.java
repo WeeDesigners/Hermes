@@ -4,7 +4,11 @@ package agh.edu.hermes.controllers;
 import agh.edu.hermes.services.SlaRuleService;
 import agh.edu.hermes.types.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 
 @RestController
@@ -19,33 +23,37 @@ public class SlaRulesController {
     }
 
     @PostMapping("/addRuleObject")
-    public String addRule(@RequestBody SlaRule rule) {
-        if(ruleService.addRuleObject(rule)){
-            return "Rule added successfully";
+    public ResponseEntity<SlaRule> addRule(@RequestBody SlaRule rule) {
+        if(ruleService.addRuleObject(rule) != null) {
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .replacePath("/rules/sla/{id}")
+                    .buildAndExpand(rule.id)
+                    .toUri();
+            return ResponseEntity.created(location).body(rule);
         }
-        return "Rule not added";
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/addRuleString")
-    public String addRule(@RequestBody String ruleString) {
-        if(ruleService.addRuleString(ruleString)){
-            return "Rule added successfully";
+    public ResponseEntity<SlaRule> addRule(@RequestBody String ruleString) {
+        SlaRule rule = ruleService.addRuleString(ruleString);
+        if(rule != null) {
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .replacePath("/rules/sla/{id}")
+                    .buildAndExpand(rule.id)
+                    .toUri();
+            return ResponseEntity.created(location).body(rule);
         }
-        return "Rule not added";
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{id}")
-    public SlaRule getRuleObject(@PathVariable("id") long id) {
-        return ruleService.getRuleObject(id);
-    }
-
-    @GetMapping("/{id}/getString")
-    public String getRuleString(@PathVariable("id") long id) {
-        String result = ruleService.getRuleString(id);
-        if(result.isEmpty()){
-            return "Cannot get rule of id " + id + ".";
+    public ResponseEntity<SlaRule> getRuleObject(@PathVariable("id") long id) {
+        SlaRule rule = ruleService.getRuleObject(id);
+        if(rule == null){
+            return ResponseEntity.notFound().build();
         }
-        return result;
+        return ResponseEntity.ok(ruleService.getRuleObject(id));
     }
 
 }
