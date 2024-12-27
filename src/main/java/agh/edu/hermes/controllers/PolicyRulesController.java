@@ -4,7 +4,11 @@ package agh.edu.hermes.controllers;
 import agh.edu.hermes.services.PolicyRuleService;
 import agh.edu.hermes.types.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 
 @RestController
@@ -19,11 +23,15 @@ public class PolicyRulesController {
     }
 
     @PostMapping("/addRuleObject")
-    public String addRule(@RequestBody PolicyRule rule) {
+    public ResponseEntity<PolicyRule> addRule(@RequestBody PolicyRule rule) {
         if(ruleService.addRuleObject(rule)){
-            return "Rule added successfully";
+            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                    .replacePath("/rules/policy/{id}")
+                    .buildAndExpand(rule.id)
+                    .toUri();
+            return ResponseEntity.created(location).body(rule);
         }
-        return "Rule not added";
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/addRuleString")
