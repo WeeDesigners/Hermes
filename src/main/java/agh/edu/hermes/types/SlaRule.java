@@ -2,25 +2,26 @@ package agh.edu.hermes.types;
 
 import agh.edu.hermes.generators.IdGenerator;
 import agh.edu.hermes.types.attributes.*;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Entity
 public class SlaRule {
-
-    public final long id;
-    public ValueType valueType;
-    public List<Condition> conditions;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private ValueType valueType;
+    @OneToMany
+    private List<Condition> conditions;
 
     public SlaRule(){
-        id = IdGenerator.getNextId();
         valueType = null;
         conditions = new ArrayList<>();
     }
 
     public SlaRule(ValueType valueType) {
-        this.id = IdGenerator.getNextId();
         this.valueType = valueType;
         this.conditions = new ArrayList<>();
     }
@@ -44,6 +45,14 @@ public class SlaRule {
 
     public void clearConditions() {
         this.conditions.clear();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public ValueType getValueType() {
+        return valueType;
     }
 
     @Override

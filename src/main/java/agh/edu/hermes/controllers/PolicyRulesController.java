@@ -27,7 +27,7 @@ public class PolicyRulesController {
         if(ruleService.addRuleObject(rule) != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/policy/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }
@@ -40,7 +40,7 @@ public class PolicyRulesController {
         if(rule != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/policy/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }

@@ -1,7 +1,7 @@
 package agh.edu.hermes.services;
 
 
-import agh.edu.hermes.storages.Policies;
+import agh.edu.hermes.types.Policies;
 import agh.edu.hermes.storages.RuleStorage;
 import agh.edu.hermes.types.PolicyRule;
 import org.springframework.stereotype.Service;

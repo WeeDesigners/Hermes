@@ -23,7 +23,7 @@ public class RuleStorage {
     }
 
     public SlaRule addSlaRule(SlaRule rule) {
-        if(getSlaRule(rule.id) == null){
+        if(getSlaRule(rule.getId()) == null){
             slaRules.add(rule);
             return rule;
         }
@@ -31,7 +31,7 @@ public class RuleStorage {
     }
 
     public PolicyRule addPolicyRule(PolicyRule rule) {
-        if(getPolicyRule(rule.id) == null){
+        if(getPolicyRule(rule.getId()) == null){
             policyRules.add(rule);
             return rule;
         }
@@ -40,7 +40,7 @@ public class RuleStorage {
 
     public SlaRule getSlaRule(long id){
         for(SlaRule rule : slaRules){
-            if(rule.id == id){
+            if(rule.getId() == id){
                 return rule;
             }
         }
@@ -49,7 +49,7 @@ public class RuleStorage {
 
     public PolicyRule getPolicyRule(long id){
         for(PolicyRule rule : policyRules){
-            if(rule.id == id){
+            if(rule.getId() == id){
                 return rule;
             }
         }

@@ -28,7 +28,7 @@ public class SlaController {
         if(sla != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/sla/{id}")
-                    .buildAndExpand(sla.id)
+                    .buildAndExpand(sla.getId())
                     .toUri();
             return ResponseEntity.created(location).body(sla);
         }

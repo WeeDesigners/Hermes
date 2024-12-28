@@ -27,7 +27,7 @@ public class SlaRulesController {
         if(ruleService.addRuleObject(rule) != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/sla/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }
@@ -40,7 +40,7 @@ public class SlaRulesController {
         if(rule != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/sla/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }

@@ -2,7 +2,7 @@ package agh.edu.hermes.controllers;
 
 
 import agh.edu.hermes.services.PoliciesService;
-import agh.edu.hermes.storages.Policies;
+import agh.edu.hermes.types.Policies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

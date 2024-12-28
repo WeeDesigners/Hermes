@@ -2,27 +2,30 @@ package agh.edu.hermes.types;
 
 import agh.edu.hermes.generators.IdGenerator;
 import agh.edu.hermes.types.attributes.*;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class PolicyRule {
-
-    public final long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     public final String name;
-    private final List<Condition> conditions;
-    public final Action action;
+    @OneToMany
+    private List<Condition> conditions;
+    @OneToOne
+    private final Action action;
 
     public PolicyRule() {
-        this.id = IdGenerator.getNextId();
         this.name = null;
         this.conditions = new ArrayList<>();
         this.action = null;
     }
 
     public PolicyRule(String name, Action action) {
-        this.id = IdGenerator.getNextId();
         this.name = name;
         this.conditions = new ArrayList<>();
         this.action = action;
@@ -47,6 +50,18 @@ public class PolicyRule {
 
     public void clearConditions() {
         this.conditions.clear();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Action getAction() {
+        return action;
     }
 
     @Override

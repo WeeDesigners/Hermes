@@ -44,7 +44,7 @@ public class SlaStorage {
 
     public Sla getSlaById(long id){
         for (Sla sla : this.slaList) {
-            if(sla.id == id){
+            if(sla.getId() == id){
                 return sla;
             }
         }
