@@ -4,16 +4,8 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      image_name:
-        required: true
-        type: string
-  workflow_call:
-    inputs:
-      image_name:
-        required: true
-        type: string
+    branches:
+      - master
 
 jobs:
   publish:
@@ -26,6 +18,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -50,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ github.event.inputs.image_name }}
+          images: weedesigners/hermes
 
       - name: Build and push Docker image
         id: push
