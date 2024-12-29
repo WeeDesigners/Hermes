@@ -1,9 +1,6 @@
 package agh.edu.hermes.types.attributes;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Condition {
@@ -11,6 +8,7 @@ public class Condition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String metric;
+    @Enumerated(EnumType.STRING)
     private RelationType relation;
     private double value;
 
