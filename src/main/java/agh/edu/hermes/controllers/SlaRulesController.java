@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -29,6 +30,11 @@ public class SlaRulesController {
             return ResponseEntity.created(location).body(rule);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<SlaRule>> getAllRules() {
+        return ResponseEntity.ok(slaRuleService.getAllRules());
     }
 
     @DeleteMapping("/{id}")

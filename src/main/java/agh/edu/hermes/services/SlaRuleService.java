@@ -8,6 +8,8 @@ import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SlaRuleService {
 
@@ -30,6 +32,10 @@ public class SlaRuleService {
             return null;
         }
         return addRuleObject(rule);
+    }
+
+    public List<SlaRule> getAllRules(){
+        return slaRuleRepository.findAll();
     }
 
     public SlaRule getRuleObject(long id){
