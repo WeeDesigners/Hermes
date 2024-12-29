@@ -12,25 +12,13 @@ import java.net.URI;
 
 
 @RestController
-@RequestMapping("/rules/sla")
+@RequestMapping("/sla/rules")
 public class SlaRulesController {
 
     @Autowired
     private SlaRuleService slaRuleService;
 
-    @PostMapping("/addRuleObject")
-    public ResponseEntity<SlaRule> addRule(@RequestBody SlaRule rule) {
-        if(slaRuleService.addRuleObject(rule) != null) {
-            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                    .replacePath("/rules/sla/{id}")
-                    .buildAndExpand(rule.getId())
-                    .toUri();
-            return ResponseEntity.created(location).body(rule);
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/addRuleString")
+    @PutMapping("")
     public ResponseEntity<SlaRule> addRule(@RequestBody String ruleString) {
         SlaRule rule = slaRuleService.addRuleString(ruleString);
         if(rule != null) {
@@ -43,6 +31,15 @@ public class SlaRulesController {
         return ResponseEntity.badRequest().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SlaRule> deleteRuleObject(@PathVariable("id") long id) {
+        if(slaRuleService.getRuleObject(id) != null){
+            slaRuleService.removeSlaRule(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SlaRule> getRuleObject(@PathVariable("id") long id) {
         SlaRule rule = slaRuleService.getRuleObject(id);
@@ -50,6 +47,11 @@ public class SlaRulesController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(rule);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<SlaRule> modifyRuleObject(@PathVariable("id") long id, @RequestBody String ruleString) {
+        return ResponseEntity.ok(slaRuleService.modifySlaRule(id, ruleString));
     }
 
 }

@@ -54,11 +54,4 @@ public class PolicyRuleService {
         policyRuleRepository.deleteById(id);
     }
 
-    public String getRuleString(long id){
-        PolicyRule rule = getRuleObject(id);
-        if(rule == null) {
-            return "";
-        }
-        return ruleParserService.parsePolicyRuleObjectToString(rule);
-    }
 }
