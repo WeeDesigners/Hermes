@@ -9,4 +9,4 @@ docker-build-local-windows:
 
 docker-build-and-push:
 	./scripts/build-docker.sh
-	docker push weedesigners/hermes:latest
+	sudo docker push weedesigners/hermes:latest
