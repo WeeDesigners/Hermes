@@ -1,24 +1,26 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.persistance.entities;
 
 
-import agh.edu.hermes.generators.IdGenerator;
-import agh.edu.hermes.types.attributes.SlaType;
+import agh.edu.hermes.enums.SlaType;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Entity
 public class Sla {
 
-    public final long id;
-    public final SlaType type;
-    public final String clientId;
-    public final String applicationId;
-    private final List<SlaRule> slaRules;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private SlaType type;
+    private String clientId;
+    private String applicationId;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<SlaRule> slaRules;
 
 
     public Sla() {
-        this.id = IdGenerator.getNextId();
         this.type = null;
         this.clientId = null;
         this.applicationId = null;
@@ -26,7 +28,6 @@ public class Sla {
     }
 
     public Sla(SlaType type, String clientId, String applicationId) {
-        this.id = IdGenerator.getNextId();
         this.type = type;
         this.clientId = clientId;
         this.applicationId = applicationId;
@@ -34,7 +35,6 @@ public class Sla {
     }
 
     public Sla(SlaType type, String clientId, String applicationId, List<SlaRule> slaRules) {
-        this.id = IdGenerator.getNextId();
         this.type = type;
         this.clientId = clientId;
         this.applicationId = applicationId;
@@ -43,7 +43,7 @@ public class Sla {
 
     private boolean checkUniqueId(long id){
         for(SlaRule rule : slaRules){
-            if(rule.id == id){
+            if(rule.getId() == id){
                 return false;
             }
         }
@@ -60,7 +60,7 @@ public class Sla {
     }
 
     public boolean addRule(SlaRule rule){
-        if(!checkUniqueId(rule.id)){
+        if(!checkUniqueId(rule.getId())){
             return false;
         }
         else {
@@ -71,7 +71,7 @@ public class Sla {
 
     public SlaRule removeRule(long id){
         for(SlaRule rule : slaRules){
-            if(rule.id == id){
+            if(rule.getId() == id){
                 slaRules.remove(rule);
                 return rule;
             }
@@ -83,10 +83,25 @@ public class Sla {
         this.slaRules.clear();
     }
 
-    public List<SlaRule> getRules() {
+    public List<SlaRule> getSlaRules() {
         return new ArrayList<>(slaRules);
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public SlaType getType() {
+        return type;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
 
     @Override
     public String toString() {

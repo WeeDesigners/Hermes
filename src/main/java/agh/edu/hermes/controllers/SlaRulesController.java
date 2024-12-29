@@ -2,7 +2,7 @@ package agh.edu.hermes.controllers;
 
 
 import agh.edu.hermes.services.SlaRuleService;
-import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +15,15 @@ import java.net.URI;
 @RequestMapping("/rules/sla")
 public class SlaRulesController {
 
-    private final SlaRuleService ruleService;
-
     @Autowired
-    public SlaRulesController(SlaRuleService ruleService) {
-        this.ruleService = ruleService;
-    }
+    private SlaRuleService slaRuleService;
 
     @PostMapping("/addRuleObject")
     public ResponseEntity<SlaRule> addRule(@RequestBody SlaRule rule) {
-        if(ruleService.addRuleObject(rule) != null) {
+        if(slaRuleService.addRuleObject(rule) != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/sla/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }
@@ -36,11 +32,11 @@ public class SlaRulesController {
 
     @PostMapping("/addRuleString")
     public ResponseEntity<SlaRule> addRule(@RequestBody String ruleString) {
-        SlaRule rule = ruleService.addRuleString(ruleString);
+        SlaRule rule = slaRuleService.addRuleString(ruleString);
         if(rule != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/sla/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }
@@ -49,11 +45,11 @@ public class SlaRulesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SlaRule> getRuleObject(@PathVariable("id") long id) {
-        SlaRule rule = ruleService.getRuleObject(id);
+        SlaRule rule = slaRuleService.getRuleObject(id);
         if(rule == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(ruleService.getRuleObject(id));
+        return ResponseEntity.ok(rule);
     }
 
 }

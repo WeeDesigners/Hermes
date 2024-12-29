@@ -1,8 +1,7 @@
 package agh.edu.hermes.controllers;
 
 import agh.edu.hermes.services.SlaService;
-import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.types.Sla;
+import agh.edu.hermes.persistance.entities.Sla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class SlaController {
         if(sla != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/sla/{id}")
-                    .buildAndExpand(sla.id)
+                    .buildAndExpand(sla.getId())
                     .toUri();
             return ResponseEntity.created(location).body(sla);
         }
@@ -37,7 +36,7 @@ public class SlaController {
 
     @PostMapping("/{sla_id}/add/{rule_id}")
     public ResponseEntity<?> addRuleToSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId) {
-        if(slaService.addRuleToSlaById(slaId, ruleId)) {
+        if(slaService.addRuleToSlaById(slaId, ruleId) != null) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
@@ -45,7 +44,7 @@ public class SlaController {
 
     @DeleteMapping("/{sla_id}/remove/{rule_id}")
     public ResponseEntity<?> removeRuleFromSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId){
-        if(slaService.removeRuleFromSla(slaId, ruleId)) {
+        if(slaService.removeRuleFromSla(slaId, ruleId) != null) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
@@ -53,10 +52,8 @@ public class SlaController {
 
     @DeleteMapping("/{sla_id}")
     public ResponseEntity<?> removeSla(@PathVariable("sla_id") long id){
-        if(slaService.removeSlaById(id)) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+        slaService.removeSlaById(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{sla_id}")

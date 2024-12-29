@@ -1,24 +1,26 @@
 package agh.edu.hermes.services;
 
+import agh.edu.hermes.persistance.repositories.ClauseRepository;
+import agh.edu.hermes.persistance.repositories.SlaRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
-import agh.edu.hermes.storages.RuleStorage;
-import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SlaRuleService {
 
-    private final RuleParserService ruleParserService;
-
     @Autowired
-    public SlaRuleService(RuleParserService ruleParserService) {
-        this.ruleParserService = ruleParserService;
-    }
+    private SlaRuleRepository slaRuleRepository;
+    @Autowired
+    private ClauseRepository clauseRepository;
+    @Autowired
+    private RuleParserService ruleParserService;
+
 
     public SlaRule addRuleObject(SlaRule rule){
-        RuleStorage rs = RuleStorage.getInstance();
-        return rs.addSlaRule(rule);
+        clauseRepository.saveAll(rule.getConditions());
+        return slaRuleRepository.save(rule);
     }
 
     public SlaRule addRuleString(String ruleString){
@@ -30,8 +32,7 @@ public class SlaRuleService {
     }
 
     public SlaRule getRuleObject(long id){
-        RuleStorage rs = RuleStorage.getInstance();
-        return rs.getSlaRule(id);
+        return slaRuleRepository.getReferenceById(id);
     }
 
     public String getRuleString(long id){

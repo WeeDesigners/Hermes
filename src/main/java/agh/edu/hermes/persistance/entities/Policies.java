@@ -1,29 +1,26 @@
-package agh.edu.hermes.storages;
+package agh.edu.hermes.persistance.entities;
 
 import agh.edu.hermes.checker.SlaViolationChecker;
-import agh.edu.hermes.types.PolicyRule;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Policies {
 
-    private final List<PolicyRule> rules;
+    @Id
+    private long id = 1;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<PolicyRule> rules;
 
-
-    private final static Policies instance = new Policies();
-
-    private Policies() {
+    public Policies() {
         this.rules = new ArrayList<>();
-    }
-
-    public static Policies getInstance() {
-        return instance;
     }
 
     private boolean checkUniqueId(long id){
         for(PolicyRule rule : rules){
-            if(rule.id == id){
+            if(rule.getId() == id){
                 return false;
             }
         }
@@ -43,7 +40,7 @@ public class Policies {
         if(SlaViolationChecker.checkRule(rule)){
             return false;
         }
-        if(checkUniqueId(rule.id)){
+        if(checkUniqueId(rule.getId())){
             this.rules.add(rule);
             return true;
         }
@@ -52,7 +49,7 @@ public class Policies {
 
     public PolicyRule removeRule(long id){
         for(PolicyRule rule : rules){
-            if(rule.id == id){
+            if(rule.getId() == id){
                 rules.remove(rule);
                 return rule;
             }

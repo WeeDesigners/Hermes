@@ -1,7 +1,7 @@
 package agh.edu.hermes.checker;
 
 
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class SlaViolationChecker {
   */
   public static boolean checkRule(PolicyRule rule) {
 //    Sla sla = Sla.getInstance();
-//    for (SlaRule slaRule : sla.getRules()) {
+//    for (SlaRule slaRule : sla.getSlaRules()) {
 //      if (slaRule.subject == rule.subject && slaRule.attribute == rule.attribute) {
 //        if (slaRule.unit != rule.unit) {
 //          throw new IllegalArgumentException();

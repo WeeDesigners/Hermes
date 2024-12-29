@@ -1,4 +1,4 @@
-package agh.edu.hermes.types.attributes;
+package agh.edu.hermes.enums;
 
 import java.util.List;
 

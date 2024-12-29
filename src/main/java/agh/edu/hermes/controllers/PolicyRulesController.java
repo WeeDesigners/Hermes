@@ -2,7 +2,7 @@ package agh.edu.hermes.controllers;
 
 
 import agh.edu.hermes.services.PolicyRuleService;
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ public class PolicyRulesController {
         if(ruleService.addRuleObject(rule) != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/policy/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }
@@ -40,7 +40,7 @@ public class PolicyRulesController {
         if(rule != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/policy/{id}")
-                    .buildAndExpand(rule.id)
+                    .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
         }

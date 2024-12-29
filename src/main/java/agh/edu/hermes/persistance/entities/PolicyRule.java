@@ -1,52 +1,65 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.persistance.entities;
 
-import agh.edu.hermes.generators.IdGenerator;
-import agh.edu.hermes.types.attributes.*;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class PolicyRule {
-
-    public final long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     public final String name;
-    private final List<Condition> conditions;
-    public final Action action;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Clause> conditions;
+    @OneToOne(fetch = FetchType.EAGER)
+    private final Action action;
 
     public PolicyRule() {
-        this.id = IdGenerator.getNextId();
         this.name = null;
         this.conditions = new ArrayList<>();
         this.action = null;
     }
 
     public PolicyRule(String name, Action action) {
-        this.id = IdGenerator.getNextId();
         this.name = name;
         this.conditions = new ArrayList<>();
         this.action = action;
     }
 
-    public boolean addConditions(List<Condition> conditions) {
-        for(Condition condition : conditions) {
-            if(!this.conditions.contains(condition)) {
+    public boolean addConditions(List<Clause> clauses) {
+        for(Clause clause : clauses) {
+            if(!this.conditions.contains(clause)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean addCondition(Condition condition) {
-        return conditions.add(condition);
+    public boolean addCondition(Clause clause) {
+        return conditions.add(clause);
     }
 
-    public List<Condition> getConditions() {
+    public List<Clause> getConditions() {
         return new ArrayList<>(conditions);
     }
 
     public void clearConditions() {
         this.conditions.clear();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Action getAction() {
+        return action;
     }
 
     @Override

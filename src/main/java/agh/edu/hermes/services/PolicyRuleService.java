@@ -1,24 +1,29 @@
 package agh.edu.hermes.services;
 
+import agh.edu.hermes.persistance.repositories.ActionRepository;
+import agh.edu.hermes.persistance.repositories.ClauseRepository;
+import agh.edu.hermes.persistance.repositories.PolicyRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
-import agh.edu.hermes.storages.RuleStorage;
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyRuleService {
 
-    private final RuleParserService ruleParserService;
-
     @Autowired
-    public PolicyRuleService(RuleParserService ruleParserService) {
-        this.ruleParserService = ruleParserService;
-    }
+    private PolicyRuleRepository policyRuleRepository;
+    @Autowired
+    private ClauseRepository clauseRepository;
+    @Autowired
+    private ActionRepository actionRepository;
+    @Autowired
+    private RuleParserService ruleParserService;
 
     public PolicyRule addRuleObject(PolicyRule rule){
-        RuleStorage rs = RuleStorage.getInstance();
-        return rs.addPolicyRule(rule);
+        clauseRepository.saveAll(rule.getConditions());
+        actionRepository.save(rule.getAction());
+        return policyRuleRepository.save(rule);
     }
 
     public PolicyRule addRuleString(String ruleString){
@@ -30,8 +35,7 @@ public class PolicyRuleService {
     }
 
     public PolicyRule getRuleObject(long id){
-        RuleStorage rs = RuleStorage.getInstance();
-        return rs.getPolicyRule(id);
+        return policyRuleRepository.getReferenceById(id);
     }
 
     public String getRuleString(long id){
