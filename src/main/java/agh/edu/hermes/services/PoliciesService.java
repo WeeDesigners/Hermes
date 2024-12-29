@@ -1,36 +1,47 @@
 package agh.edu.hermes.services;
 
 
+import agh.edu.hermes.repositories.PoliciesRepository;
+import agh.edu.hermes.repositories.PolicyRuleRepository;
 import agh.edu.hermes.types.Policies;
-import agh.edu.hermes.storages.RuleStorage;
 import agh.edu.hermes.types.PolicyRule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PoliciesService {
 
-    public boolean addRuleToPolicies(PolicyRule rule){
-        Policies policies = Policies.getInstance();
-        return policies.addRule(rule);
+    private final PoliciesRepository policiesRepository;
+    private final PolicyRuleRepository policyRuleRepository;
+
+    @Autowired
+    public PoliciesService(PoliciesRepository pr, PolicyRuleRepository prr){
+        this.policiesRepository = pr;
+        this.policyRuleRepository = prr;
+        //there is only one Policies object (currently)
+        this.policiesRepository.save(Policies.getInstance());
     }
 
-    public boolean addRuleToPoliciesById(long id){
+    public Policies addRuleToPolicies(PolicyRule rule){
         Policies policies = Policies.getInstance();
-        RuleStorage rs = RuleStorage.getInstance();
-        PolicyRule rule = rs.getPolicyRule(id);
-        if(rule == null || rule.getClass() != PolicyRule.class){
-            return false;
+        if(policies.addRule(rule)){
+            policiesRepository.save(policies);
         }
-        return policies.addRule((PolicyRule) rule);
+        return null;
     }
 
-    public boolean removeRuleFromPolicies(long id){
+    public Policies addRuleToPoliciesById(long id){
+        PolicyRule rule = policyRuleRepository.getReferenceById(id);
+        return addRuleToPolicies(rule);
+    }
+
+    public Policies removeRuleFromPolicies(long id){
         Policies policies = Policies.getInstance();
-        PolicyRule removed = policies.removeRule(id);
-        return (removed != null);
+        policies.removeRule(id);
+        return policiesRepository.save(policies);
     }
 
-    public Policies getPolicies(){
+    public Policies getPolicies() {
         return Policies.getInstance();
     }
 
