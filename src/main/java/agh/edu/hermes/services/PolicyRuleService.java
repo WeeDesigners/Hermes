@@ -41,7 +41,6 @@ public class PolicyRuleService {
     }
 
     public PolicyRule modifyPolicyRule(long id, String ruleString){
-        policyRuleRepository.deleteById(id);
         PolicyRule newRule = ruleParserService.parsePolicyRuleStringToObject(ruleString);
         newRule.setId(id);
         return addRuleObject(newRule);
