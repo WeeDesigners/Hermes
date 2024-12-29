@@ -1,5 +1,7 @@
 package agh.edu.hermes.services;
 
+import agh.edu.hermes.repositories.ActionRepository;
+import agh.edu.hermes.repositories.ConditionRepository;
 import agh.edu.hermes.repositories.PolicyRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
 import agh.edu.hermes.types.PolicyRule;
@@ -12,9 +14,15 @@ public class PolicyRuleService {
     @Autowired
     private PolicyRuleRepository policyRuleRepository;
     @Autowired
+    private ConditionRepository conditionRepository;
+    @Autowired
+    private ActionRepository actionRepository;
+    @Autowired
     private RuleParserService ruleParserService;
 
     public PolicyRule addRuleObject(PolicyRule rule){
+        conditionRepository.saveAll(rule.getConditions());
+        actionRepository.save(rule.getAction());
         return policyRuleRepository.save(rule);
     }
 
