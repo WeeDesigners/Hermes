@@ -25,7 +25,7 @@ public class PoliciesService {
     public Policies addRuleToPolicies(PolicyRule rule){
         Policies policies = Policies.getInstance();
         if(policies.addRule(rule)){
-            policiesRepository.save(policies);
+            return policiesRepository.save(policies);
         }
         return null;
     }

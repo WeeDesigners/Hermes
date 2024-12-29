@@ -1,7 +1,6 @@
 package agh.edu.hermes.types;
 
 import agh.edu.hermes.types.attributes.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
