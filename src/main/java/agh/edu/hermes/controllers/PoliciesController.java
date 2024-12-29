@@ -20,7 +20,7 @@ public class PoliciesController {
 
     @PostMapping("/add/{id}")
     public ResponseEntity<?> addRuleToPolicies(@PathVariable("id") long id){
-        if(policiesService.addRuleToPoliciesById(id)){
+        if(policiesService.addRuleToPoliciesById(id) != null){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
@@ -28,7 +28,7 @@ public class PoliciesController {
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<?> removeRuleFromPolicies(@PathVariable("id") long id){
-        if(policiesService.removeRuleFromPolicies(id)){
+        if(policiesService.removeRuleFromPolicies(id) != null){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();

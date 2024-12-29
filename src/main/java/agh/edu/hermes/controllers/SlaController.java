@@ -37,7 +37,7 @@ public class SlaController {
 
     @PostMapping("/{sla_id}/add/{rule_id}")
     public ResponseEntity<?> addRuleToSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId) {
-        if(slaService.addRuleToSlaById(slaId, ruleId)) {
+        if(slaService.addRuleToSlaById(slaId, ruleId) != null) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
@@ -45,7 +45,7 @@ public class SlaController {
 
     @DeleteMapping("/{sla_id}/remove/{rule_id}")
     public ResponseEntity<?> removeRuleFromSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId){
-        if(slaService.removeRuleFromSla(slaId, ruleId)) {
+        if(slaService.removeRuleFromSla(slaId, ruleId) != null) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
@@ -53,10 +53,8 @@ public class SlaController {
 
     @DeleteMapping("/{sla_id}")
     public ResponseEntity<?> removeSla(@PathVariable("sla_id") long id){
-        if(slaService.removeSlaById(id)) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+        slaService.removeSlaById(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{sla_id}")

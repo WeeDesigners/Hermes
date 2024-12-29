@@ -1,6 +1,5 @@
 package agh.edu.hermes.types;
 
-import agh.edu.hermes.generators.IdGenerator;
 import agh.edu.hermes.types.attributes.*;
 import jakarta.persistence.*;
 
