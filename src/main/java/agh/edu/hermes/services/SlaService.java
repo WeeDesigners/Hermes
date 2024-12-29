@@ -1,10 +1,10 @@
 package agh.edu.hermes.services;
 
 
+import agh.edu.hermes.repositories.SlaRepository;
+import agh.edu.hermes.repositories.SlaRuleRepository;
 import agh.edu.hermes.services.parsers.SlaParserService;
-import agh.edu.hermes.storages.RuleStorage;
 import agh.edu.hermes.types.Sla;
-import agh.edu.hermes.storages.SlaStorage;
 import agh.edu.hermes.types.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,62 +14,53 @@ import java.util.List;
 @Service
 public class SlaService {
 
-    private final SlaParserService slaParserService;
-
     @Autowired
-    public SlaService(SlaParserService slaParserService) {
-        this.slaParserService = slaParserService;
-    }
+    private SlaRepository slaRepository;
+    @Autowired
+    private SlaRuleRepository slaRuleRepository;
+    @Autowired
+    private SlaParserService slaParserService;
+
 
     public Sla create(String slaString){
         Sla sla = slaParserService.parseSlaString(slaString);
         if(sla == null){
             return null;
         }
-        SlaStorage ss = SlaStorage.getInstance();
-        ss.addSla(sla);
-        return sla;
+        return slaRepository.save(sla);
     }
 
-    public boolean addRuleToSlaById(long slaId, long ruleId){
-        RuleStorage rs = RuleStorage.getInstance();
-        SlaStorage ss = SlaStorage.getInstance();
+    public Sla addRuleToSlaById(long slaId, long ruleId){
+        SlaRule rule = slaRuleRepository.getReferenceById(ruleId);
+        Sla sla = slaRepository.getReferenceById(slaId);
 
-        SlaRule rule = rs.getSlaRule(ruleId);
-        Sla sla = ss.getSlaById(slaId);
-
-        if(rule == null || sla == null){
-            return false;
+        if(sla.addRule(rule)){
+            return slaRepository.save(sla);
         }
-        return sla.addRule(rule);
+        return null;
     }
 
-    public boolean removeRuleFromSla(long slaId, long ruleId){
-        SlaStorage ss = SlaStorage.getInstance();
-        Sla sla = ss.getSlaById(slaId);
-        SlaRule removed = sla.removeRule(ruleId);
-        return (removed != null);
+    public Sla removeRuleFromSla(long slaId, long ruleId){
+        Sla sla = slaRepository.getReferenceById(slaId);
+        sla.removeRule(ruleId);
+        return slaRepository.save(sla);
     }
 
     public Sla getSla(long id){
-        return SlaStorage.getInstance().getSlaById(id);
+        return slaRepository.getReferenceById(id);
     }
 
-    public boolean removeSlaById(long id){
-        SlaStorage ss = SlaStorage.getInstance();
-        return (ss.removeSlaById(id) != null);
+    public void removeSlaById(long id){
+        slaRepository.deleteById(id);
     }
 
     public String getSlaString(long id){
-        Sla sla = SlaStorage.getInstance().getSlaById(id);
-        if(sla == null){
-            return null;
-        }
+        Sla sla = slaRepository.getReferenceById(id);
         return sla.toString();
     }
 
     public List<Sla> getSlaList(){
-        return SlaStorage.getInstance().getSlas();
+        return slaRepository.findAll();
     }
 
 }
