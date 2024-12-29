@@ -8,6 +8,8 @@ import agh.edu.hermes.persistance.entities.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PolicyRuleService {
 
@@ -36,6 +38,21 @@ public class PolicyRuleService {
 
     public PolicyRule getRuleObject(long id){
         return policyRuleRepository.getReferenceById(id);
+    }
+
+    public PolicyRule modifyPolicyRule(long id, String ruleString){
+        policyRuleRepository.deleteById(id);
+        PolicyRule newRule = ruleParserService.parsePolicyRuleStringToObject(ruleString);
+        newRule.setId(id);
+        return addRuleObject(newRule);
+    }
+
+    public List<PolicyRule> getAllRules(){
+        return policyRuleRepository.findAll();
+    }
+
+    public void removePolicyRule(long id){
+        policyRuleRepository.deleteById(id);
     }
 
     public String getRuleString(long id){
