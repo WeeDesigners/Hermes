@@ -2,7 +2,7 @@ package agh.edu.hermes.controllers;
 
 
 import agh.edu.hermes.services.SlaRuleService;
-import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

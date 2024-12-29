@@ -1,7 +1,7 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.persistance.entities;
 
 
-import agh.edu.hermes.types.attributes.SlaType;
+import agh.edu.hermes.enums.SlaType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

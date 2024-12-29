@@ -2,7 +2,7 @@ package agh.edu.hermes.controllers;
 
 
 import agh.edu.hermes.services.PolicyRuleService;
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

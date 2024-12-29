@@ -1,6 +1,5 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.persistance.entities;
 
-import agh.edu.hermes.types.attributes.*;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

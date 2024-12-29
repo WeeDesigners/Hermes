@@ -1,11 +1,11 @@
 package agh.edu.hermes.services;
 
 
-import agh.edu.hermes.repositories.SlaRepository;
-import agh.edu.hermes.repositories.SlaRuleRepository;
+import agh.edu.hermes.persistance.repositories.SlaRepository;
+import agh.edu.hermes.persistance.repositories.SlaRuleRepository;
 import agh.edu.hermes.services.parsers.SlaParserService;
-import agh.edu.hermes.types.Sla;
-import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.persistance.entities.Sla;
+import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

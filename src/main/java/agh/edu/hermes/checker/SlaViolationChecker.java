@@ -1,7 +1,7 @@
 package agh.edu.hermes.checker;
 
 
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 
 import java.util.List;
 

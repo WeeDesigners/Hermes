@@ -1,8 +1,7 @@
-package agh.edu.hermes.types.attributes;
+package agh.edu.hermes.persistance.entities;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.util.Map;
 

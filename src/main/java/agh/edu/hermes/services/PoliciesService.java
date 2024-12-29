@@ -1,10 +1,10 @@
 package agh.edu.hermes.services;
 
 
-import agh.edu.hermes.repositories.PoliciesRepository;
-import agh.edu.hermes.repositories.PolicyRuleRepository;
-import agh.edu.hermes.types.Policies;
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.repositories.PoliciesRepository;
+import agh.edu.hermes.persistance.repositories.PolicyRuleRepository;
+import agh.edu.hermes.persistance.entities.Policies;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

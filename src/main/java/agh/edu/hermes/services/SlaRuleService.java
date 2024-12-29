@@ -1,9 +1,9 @@
 package agh.edu.hermes.services;
 
-import agh.edu.hermes.repositories.ClauseRepository;
-import agh.edu.hermes.repositories.SlaRuleRepository;
+import agh.edu.hermes.persistance.repositories.ClauseRepository;
+import agh.edu.hermes.persistance.repositories.SlaRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
-import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

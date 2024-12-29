@@ -1,6 +1,6 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.persistance.entities;
 
-import agh.edu.hermes.types.attributes.*;
+import agh.edu.hermes.enums.ValueType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

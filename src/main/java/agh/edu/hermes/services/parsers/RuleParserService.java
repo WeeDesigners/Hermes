@@ -1,7 +1,7 @@
 package agh.edu.hermes.services.parsers;
 
-import agh.edu.hermes.types.PolicyRule;
-import agh.edu.hermes.types.SlaRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
+import agh.edu.hermes.persistance.entities.SlaRule;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;

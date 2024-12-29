@@ -1,5 +1,6 @@
-package agh.edu.hermes.types.attributes;
+package agh.edu.hermes.persistance.entities;
 
+import agh.edu.hermes.enums.RelationType;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +9,6 @@ public class Clause {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String metric;
-    @Enumerated(EnumType.STRING)
     private RelationType relation;
     private double value;
 

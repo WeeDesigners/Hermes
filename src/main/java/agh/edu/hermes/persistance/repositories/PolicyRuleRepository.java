@@ -1,6 +1,6 @@
-package agh.edu.hermes.repositories;
+package agh.edu.hermes.persistance.repositories;
 
-import agh.edu.hermes.types.PolicyRule;
+import agh.edu.hermes.persistance.entities.PolicyRule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

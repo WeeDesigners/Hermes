@@ -1,4 +1,4 @@
-package agh.edu.hermes.types;
+package agh.edu.hermes.persistance.entities;
 
 import agh.edu.hermes.checker.SlaViolationChecker;
 import jakarta.persistence.*;
