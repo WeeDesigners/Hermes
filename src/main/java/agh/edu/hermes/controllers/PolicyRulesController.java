@@ -19,7 +19,7 @@ public class PolicyRulesController {
     @Autowired
     private PolicyRuleService policyRuleService;
 
-    @PostMapping("")
+    @PutMapping("")
     public ResponseEntity<PolicyRule> addRule(@RequestBody String ruleString) {
         PolicyRule rule = policyRuleService.addRuleString(ruleString);
         if(rule != null){

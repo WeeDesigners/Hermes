@@ -21,8 +21,8 @@ public class SlaController {
         this.slaService = slaService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Sla> setSlaProperties(@RequestBody String slaString) {
+    @PutMapping("")
+    public ResponseEntity<Sla> createSla(@RequestBody String slaString) {
         Sla sla = slaService.create(slaString);
         if(sla != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
@@ -32,6 +32,11 @@ public class SlaController {
             return ResponseEntity.created(location).body(sla);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Sla>> getSlaList() {
+        return ResponseEntity.ok(slaService.getSlaList());
     }
 
     @PostMapping("/{sla_id}/add/{rule_id}")
@@ -65,9 +70,6 @@ public class SlaController {
         return ResponseEntity.ok(sla);
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Sla>> getSlaList() {
-        return ResponseEntity.ok(slaService.getSlaList());
-    }
+
 
 }
