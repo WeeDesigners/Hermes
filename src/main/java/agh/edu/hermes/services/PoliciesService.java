@@ -18,14 +18,10 @@ public class PoliciesService {
     public PoliciesService(PoliciesRepository pr, PolicyRuleRepository prr){
         this.policiesRepository = pr;
         this.policyRuleRepository = prr;
-        //there can be only one Policies object in database
-        if(this.policiesRepository.count() == 0){
-            this.policiesRepository.save(new Policies());
-        }
     }
 
     public Policies addRuleToPolicies(PolicyRule rule){
-        Policies policies = policiesRepository.getReferenceById(1L);
+        Policies policies = getPolicies();
         if(policies.addRule(rule)){
             return policiesRepository.save(policies);
         }
@@ -38,12 +34,16 @@ public class PoliciesService {
     }
 
     public Policies removeRuleFromPolicies(long id){
-        Policies policies = policiesRepository.getReferenceById(1L);
+        Policies policies = getPolicies();
         policies.removeRule(id);
         return policiesRepository.save(policies);
     }
 
     public Policies getPolicies() {
+        //if Policies object does not exist, then create new
+        if(this.policiesRepository.count() == 0){
+            this.policiesRepository.save(new Policies());
+        }
         return policiesRepository.getReferenceById(1L);
     }
 
