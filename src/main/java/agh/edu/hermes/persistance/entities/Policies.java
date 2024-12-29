@@ -10,20 +10,12 @@ import java.util.List;
 public class Policies {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id = 1;
     @OneToMany(fetch = FetchType.EAGER)
     private List<PolicyRule> rules;
 
-
-    private final static Policies instance = new Policies();
-
     public Policies() {
         this.rules = new ArrayList<>();
-    }
-
-    public static Policies getInstance() {
-        return instance;
     }
 
     private boolean checkUniqueId(long id){
