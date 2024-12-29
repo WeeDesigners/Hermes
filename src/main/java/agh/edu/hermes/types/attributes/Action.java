@@ -14,9 +14,15 @@ public class Action {
     private String collectionName;
     private String actionName;
     @ElementCollection
-    @CollectionTable(name = "params")
-    @MapKeyColumn(name = "key")
-    @Column(name = "value")
+    @CollectionTable(
+            name = "params",
+            joinColumns = {
+                @JoinColumn(
+                        name = "action_id",
+                        referencedColumnName = "id")
+            })
+    @MapKeyColumn(name = "param_key")
+    @Column(name = "params")
     private Map<String, String> params;
 
     public Action() {}

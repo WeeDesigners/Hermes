@@ -13,37 +13,37 @@ public class SlaRule {
     private long id;
     private ValueType valueType;
     @OneToMany
-    private List<Condition> conditions;
+    private List<Clause> clauses;
 
     public SlaRule(){
         valueType = null;
-        conditions = new ArrayList<>();
+        clauses = new ArrayList<>();
     }
 
     public SlaRule(ValueType valueType) {
         this.valueType = valueType;
-        this.conditions = new ArrayList<>();
+        this.clauses = new ArrayList<>();
     }
 
-    public boolean addConditions(List<Condition> conditions) {
-        for(Condition condition : conditions) {
-            if(!this.conditions.contains(condition)) {
+    public boolean addConditions(List<Clause> clauses) {
+        for(Clause clause : clauses) {
+            if(!this.clauses.contains(clause)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean addCondition(Condition condition) {
-        return conditions.add(condition);
+    public boolean addCondition(Clause clause) {
+        return clauses.add(clause);
     }
 
-    public List<Condition> getConditions() {
-        return new ArrayList<>(conditions);
+    public List<Clause> getConditions() {
+        return new ArrayList<>(clauses);
     }
 
     public void clearConditions() {
-        this.conditions.clear();
+        this.clauses.clear();
     }
 
     public long getId() {
@@ -56,7 +56,7 @@ public class SlaRule {
 
     @Override
     public String toString() {
-        return "{" + id + ", " + valueType + ", " + conditions + "}";
+        return "{" + id + ", " + valueType + ", " + clauses + "}";
     }
 
 }

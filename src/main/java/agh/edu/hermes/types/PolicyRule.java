@@ -14,41 +14,41 @@ public class PolicyRule {
     private long id;
     public final String name;
     @OneToMany
-    private List<Condition> conditions;
+    private List<Clause> clauses;
     @OneToOne
     private final Action action;
 
     public PolicyRule() {
         this.name = null;
-        this.conditions = new ArrayList<>();
+        this.clauses = new ArrayList<>();
         this.action = null;
     }
 
     public PolicyRule(String name, Action action) {
         this.name = name;
-        this.conditions = new ArrayList<>();
+        this.clauses = new ArrayList<>();
         this.action = action;
     }
 
-    public boolean addConditions(List<Condition> conditions) {
-        for(Condition condition : conditions) {
-            if(!this.conditions.contains(condition)) {
+    public boolean addConditions(List<Clause> clauses) {
+        for(Clause clause : clauses) {
+            if(!this.clauses.contains(clause)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean addCondition(Condition condition) {
-        return conditions.add(condition);
+    public boolean addCondition(Clause clause) {
+        return clauses.add(clause);
     }
 
-    public List<Condition> getConditions() {
-        return new ArrayList<>(conditions);
+    public List<Clause> getConditions() {
+        return new ArrayList<>(clauses);
     }
 
     public void clearConditions() {
-        this.conditions.clear();
+        this.clauses.clear();
     }
 
     public Long getId() {
@@ -69,7 +69,7 @@ public class PolicyRule {
         return super.equals(o)
                 && this.id == rule.id
                 && this.name.equals(rule.name)
-                && this.conditions.equals(rule.getConditions())
+                && this.clauses.equals(rule.getConditions())
                 && this.action.equals(rule.action);
     }
 
@@ -77,12 +77,12 @@ public class PolicyRule {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, conditions, action);
+        return Objects.hash(id, name, clauses, action);
     }
 
     @Override
     public String toString() {
         // TODO -> better concat
-        return "{ " + id + ", " + name + ", " + conditions + ", " + action + " }";
+        return "{ " + id + ", " + name + ", " + clauses + ", " + action + " }";
     }
 }

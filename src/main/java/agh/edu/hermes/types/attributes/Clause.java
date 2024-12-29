@@ -3,7 +3,7 @@ package agh.edu.hermes.types.attributes;
 import jakarta.persistence.*;
 
 @Entity
-public class Condition {
+public class Clause {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -13,9 +13,9 @@ public class Condition {
     private double value;
 
 
-    public Condition() {}
+    public Clause() {}
 
-    public Condition(String metric, RelationType relation, double value) {
+    public Clause(String metric, RelationType relation, double value) {
         this.metric = metric;
         this.relation = relation;
         this.value = value;
