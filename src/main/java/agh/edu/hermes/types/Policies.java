@@ -12,7 +12,7 @@ public class Policies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<PolicyRule> rules;
 
 

@@ -1,6 +1,7 @@
 package agh.edu.hermes.types;
 
 import agh.edu.hermes.types.attributes.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -12,22 +13,22 @@ public class SlaRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private ValueType valueType;
-    @OneToMany
-    private List<Clause> clauses;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Clause> conditions;
 
     public SlaRule(){
         valueType = null;
-        clauses = new ArrayList<>();
+        conditions = new ArrayList<>();
     }
 
     public SlaRule(ValueType valueType) {
         this.valueType = valueType;
-        this.clauses = new ArrayList<>();
+        this.conditions = new ArrayList<>();
     }
 
     public boolean addConditions(List<Clause> clauses) {
         for(Clause clause : clauses) {
-            if(!this.clauses.contains(clause)) {
+            if(!this.conditions.contains(clause)) {
                 return false;
             }
         }
@@ -35,15 +36,15 @@ public class SlaRule {
     }
 
     public boolean addCondition(Clause clause) {
-        return clauses.add(clause);
+        return conditions.add(clause);
     }
 
     public List<Clause> getConditions() {
-        return new ArrayList<>(clauses);
+        return new ArrayList<>(conditions);
     }
 
     public void clearConditions() {
-        this.clauses.clear();
+        this.conditions.clear();
     }
 
     public long getId() {
@@ -56,7 +57,7 @@ public class SlaRule {
 
     @Override
     public String toString() {
-        return "{" + id + ", " + valueType + ", " + clauses + "}";
+        return "{" + id + ", " + valueType + ", " + conditions + "}";
     }
 
 }

@@ -19,6 +19,8 @@ public class SlaService {
     @Autowired
     private SlaRuleRepository slaRuleRepository;
     @Autowired
+    private SlaRuleService slaRuleService;
+    @Autowired
     private SlaParserService slaParserService;
 
 
@@ -26,6 +28,9 @@ public class SlaService {
         Sla sla = slaParserService.parseSlaString(slaString);
         if(sla == null){
             return null;
+        }
+        for(SlaRule rule : sla.getSlaRules()){
+            slaRuleService.addRuleObject(rule);
         }
         return slaRepository.save(sla);
     }

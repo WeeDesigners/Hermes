@@ -13,7 +13,7 @@ public class Action {
     private long id;
     private String collectionName;
     private String actionName;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "params",
             joinColumns = {

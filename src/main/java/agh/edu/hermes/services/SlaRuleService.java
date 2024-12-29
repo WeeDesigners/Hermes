@@ -1,6 +1,6 @@
 package agh.edu.hermes.services;
 
-import agh.edu.hermes.repositories.ConditionRepository;
+import agh.edu.hermes.repositories.ClauseRepository;
 import agh.edu.hermes.repositories.SlaRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
 import agh.edu.hermes.types.SlaRule;
@@ -13,13 +13,13 @@ public class SlaRuleService {
     @Autowired
     private SlaRuleRepository slaRuleRepository;
     @Autowired
-    private ConditionRepository conditionRepository;
+    private ClauseRepository clauseRepository;
     @Autowired
     private RuleParserService ruleParserService;
 
 
     public SlaRule addRuleObject(SlaRule rule){
-        conditionRepository.saveAll(rule.getConditions());
+        clauseRepository.saveAll(rule.getConditions());
         return slaRuleRepository.save(rule);
     }
 

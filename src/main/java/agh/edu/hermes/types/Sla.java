@@ -16,7 +16,7 @@ public class Sla {
     private SlaType type;
     private String clientId;
     private String applicationId;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<SlaRule> slaRules;
 
 
