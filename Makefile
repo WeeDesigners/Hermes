@@ -1,4 +1,4 @@
-docker-build-local:
+docker-build:
 	./scripts/build-docker.sh
 
 docker-build-local-windows:
@@ -7,6 +7,5 @@ docker-build-local-windows:
 	./scripts/buil-docker.sh
 
 
-docker-build-and-push:
-	./scripts/build-docker.sh
-	docker push weedesigners/hermes:latest
+docker-build-and-push: docker-build
+	sudo docker push weedesigners/hermes:latest
