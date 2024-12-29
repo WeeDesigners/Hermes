@@ -1,5 +1,6 @@
 package agh.edu.hermes.services;
 
+import agh.edu.hermes.repositories.PolicyRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
 import agh.edu.hermes.storages.RuleStorage;
 import agh.edu.hermes.types.PolicyRule;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PolicyRuleService {
 
+    @Autowired
+    private PolicyRuleRepository policyRuleRepository;
     private final RuleParserService ruleParserService;
 
     @Autowired
