@@ -24,7 +24,7 @@ public class SlaRulesController {
         SlaRule rule = slaRuleService.addRuleString(ruleString);
         if(rule != null) {
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                    .replacePath("sla/{id}")
+                    .replacePath("sla/rules/{id}")
                     .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
