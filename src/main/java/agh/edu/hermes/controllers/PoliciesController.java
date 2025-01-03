@@ -8,17 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/policies")
+@RequestMapping("/policies/active")
 public class PoliciesController {
 
-    private final PoliciesService policiesService;
-
     @Autowired
-    public PoliciesController(PoliciesService policiesService) {
-        this.policiesService = policiesService;
+    private PoliciesService policiesService;
+
+
+    @GetMapping("")
+    public ResponseEntity<Policies> getPoliciesObject(){
+        return ResponseEntity.ok(policiesService.getPolicies());
     }
 
-    @PostMapping("/add/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> addRuleToPolicies(@PathVariable("id") long id){
         if(policiesService.addRuleToPoliciesById(id) != null){
             return ResponseEntity.ok().build();
@@ -26,17 +28,12 @@ public class PoliciesController {
         return ResponseEntity.badRequest().build();
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> removeRuleFromPolicies(@PathVariable("id") long id){
         if(policiesService.removeRuleFromPolicies(id) != null){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping("")
-    public ResponseEntity<Policies> getPoliciesObject(){
-        return ResponseEntity.ok(policiesService.getPolicies());
     }
 
 }

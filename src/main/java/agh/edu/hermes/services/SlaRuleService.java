@@ -1,11 +1,14 @@
 package agh.edu.hermes.services;
 
+import agh.edu.hermes.persistance.entities.PolicyRule;
 import agh.edu.hermes.persistance.repositories.ClauseRepository;
 import agh.edu.hermes.persistance.repositories.SlaRuleRepository;
 import agh.edu.hermes.services.parsers.RuleParserService;
 import agh.edu.hermes.persistance.entities.SlaRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SlaRuleService {
@@ -31,15 +34,22 @@ public class SlaRuleService {
         return addRuleObject(rule);
     }
 
+    public List<SlaRule> getAllRules(){
+        return slaRuleRepository.findAll();
+    }
+
     public SlaRule getRuleObject(long id){
         return slaRuleRepository.getReferenceById(id);
     }
 
-    public String getRuleString(long id){
-        SlaRule rule = getRuleObject(id);
-        if(rule == null) {
-            return "";
-        }
-        return ruleParserService.parseSlaRuleObjectToString(rule);
+    public void removeSlaRule(long id){
+        slaRuleRepository.deleteById(id);
     }
+
+    public SlaRule modifySlaRule(long id, String ruleString){
+        SlaRule newRule = ruleParserService.parseSlaRuleStringToObject(ruleString);
+        newRule.setId(id);
+        return addRuleObject(newRule);
+    }
+
 }

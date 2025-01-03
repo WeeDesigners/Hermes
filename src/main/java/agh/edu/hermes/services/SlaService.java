@@ -59,9 +59,10 @@ public class SlaService {
         slaRepository.deleteById(id);
     }
 
-    public String getSlaString(long id){
-        Sla sla = slaRepository.getReferenceById(id);
-        return sla.toString();
+    public Sla modifySla(long id, String slaString){
+        Sla newSla = slaParserService.parseSlaString(slaString);
+        newSla.setId(id);
+        return slaRepository.save(newSla);
     }
 
     public List<Sla> getSlaList(){

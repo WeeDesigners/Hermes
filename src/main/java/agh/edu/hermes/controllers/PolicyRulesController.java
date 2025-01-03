@@ -9,34 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
-@RequestMapping("/rules/policy")
+@RequestMapping("/policies")
 public class PolicyRulesController {
 
-    private final PolicyRuleService ruleService;
-
     @Autowired
-    public PolicyRulesController(PolicyRuleService ruleService) {
-        this.ruleService = ruleService;
-    }
+    private PolicyRuleService policyRuleService;
 
-    @PostMapping("/addRuleObject")
-    public ResponseEntity<PolicyRule> addRule(@RequestBody PolicyRule rule) {
-        if(ruleService.addRuleObject(rule) != null){
-            URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                    .replacePath("/rules/policy/{id}")
-                    .buildAndExpand(rule.getId())
-                    .toUri();
-            return ResponseEntity.created(location).body(rule);
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/addRuleString")
+    @PutMapping("")
     public ResponseEntity<PolicyRule> addRule(@RequestBody String ruleString) {
-        PolicyRule rule = ruleService.addRuleString(ruleString);
+        PolicyRule rule = policyRuleService.addRuleString(ruleString);
         if(rule != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .replacePath("/rules/policy/{id}")
@@ -47,13 +32,29 @@ public class PolicyRulesController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("")
+    public ResponseEntity<List<PolicyRule>> getRules() {
+        return ResponseEntity.ok(policyRuleService.getAllRules());
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<PolicyRule> getRuleObject(@PathVariable("id") long id, @RequestBody String ruleString) {
+        return ResponseEntity.ok(policyRuleService.modifyPolicyRule(id, ruleString));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PolicyRule> getRuleObject(@PathVariable("id") long id) {
-        PolicyRule rule = ruleService.getRuleObject(id);
+        PolicyRule rule = policyRuleService.getRuleObject(id);
         if(rule == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(ruleService.getRuleObject(id));
+        return ResponseEntity.ok(policyRuleService.getRuleObject(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<PolicyRule> deleteRuleObject(@PathVariable("id") long id) {
+        policyRuleService.removePolicyRule(id);
+        return ResponseEntity.ok().build();
     }
 
 }
