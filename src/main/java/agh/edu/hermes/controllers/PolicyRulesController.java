@@ -24,7 +24,7 @@ public class PolicyRulesController {
         PolicyRule rule = policyRuleService.addRuleString(ruleString);
         if(rule != null){
             URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                    .replacePath("/rules/policy/{id}")
+                    .replacePath("/policies/{id}")
                     .buildAndExpand(rule.getId())
                     .toUri();
             return ResponseEntity.created(location).body(rule);
