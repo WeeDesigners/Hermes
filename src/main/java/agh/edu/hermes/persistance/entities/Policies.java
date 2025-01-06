@@ -47,14 +47,8 @@ public class Policies {
         return false;
     }
 
-    public PolicyRule removeRule(long id){
-        for(PolicyRule rule : rules){
-            if(rule.getId() == id){
-                rules.remove(rule);
-                return rule;
-            }
-        }
-        return null;
+    public boolean removeRule(long id){
+        return this.rules.removeIf(rule -> rule.getId() == id);
     }
 
     public List<PolicyRule> getRules() {
