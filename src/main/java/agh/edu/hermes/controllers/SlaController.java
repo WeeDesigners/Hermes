@@ -86,7 +86,7 @@ public class SlaController {
         return ResponseEntity.badRequest().build();
     }
 
-    @DeleteMapping("/{sla_id}/remove/{rule_id}")
+    @DeleteMapping("/{sla_id}/rule/{rule_id}")
     public ResponseEntity<?> removeRuleFromSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId){
         if(slaService.removeRuleFromSla(slaId, ruleId) != null) {
             return ResponseEntity.ok().build();
