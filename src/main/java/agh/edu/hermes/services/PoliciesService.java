@@ -33,10 +33,10 @@ public class PoliciesService {
         return addRuleToPolicies(rule);
     }
 
-    public Policies removeRuleFromPolicies(long id){
+    public boolean removeRuleFromPolicies(long id){
         Policies policies = getPolicies();
-        policies.removeRule(id);
-        return policiesRepository.save(policies);
+        policiesRepository.save(policies);
+        return policies.removeRule(id);
     }
 
     public Policies getPolicies() {
