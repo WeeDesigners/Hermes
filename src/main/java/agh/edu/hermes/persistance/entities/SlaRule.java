@@ -1,6 +1,5 @@
 package agh.edu.hermes.persistance.entities;
 
-import agh.edu.hermes.enums.ValueType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -11,18 +10,13 @@ public class SlaRule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private ValueType valueType;
+    private String valueType;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Clause> conditions;
 
     public SlaRule(){
-        valueType = null;
+        valueType = "";
         conditions = new ArrayList<>();
-    }
-
-    public SlaRule(ValueType valueType) {
-        this.valueType = valueType;
-        this.conditions = new ArrayList<>();
     }
 
     public boolean addConditions(List<Clause> clauses) {
@@ -54,7 +48,7 @@ public class SlaRule {
         this.id = id;
     }
 
-    public ValueType getValueType() {
+    public String getValueType() {
         return valueType;
     }
 

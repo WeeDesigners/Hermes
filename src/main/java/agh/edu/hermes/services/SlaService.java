@@ -35,14 +35,15 @@ public class SlaService {
         return slaRepository.save(sla);
     }
 
-    public Sla addRuleToSlaById(long slaId, long ruleId){
+    public boolean addRuleToSlaById(long slaId, long ruleId){
         SlaRule rule = slaRuleRepository.getReferenceById(ruleId);
         Sla sla = slaRepository.getReferenceById(slaId);
 
         if(sla.addRule(rule)){
-            return slaRepository.save(sla);
+            slaRepository.save(sla);
+            return true;
         }
-        return null;
+        return false;
     }
 
     public Sla removeRuleFromSla(long slaId, long ruleId){
