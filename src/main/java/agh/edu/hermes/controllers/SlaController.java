@@ -80,7 +80,7 @@ public class SlaController {
 
     @PostMapping("/{sla_id}/rule/{rule_id}")
     public ResponseEntity<?> addRuleToSla(@PathVariable("sla_id") long slaId, @PathVariable("rule_id") long ruleId) {
-        if(slaService.addRuleToSlaById(slaId, ruleId) != null) {
+        if(slaService.addRuleToSlaById(slaId, ruleId)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();

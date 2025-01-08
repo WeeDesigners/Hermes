@@ -30,7 +30,7 @@ public class PoliciesController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> removeRuleFromPolicies(@PathVariable("id") long id){
-        if(policiesService.removeRuleFromPolicies(id) != null){
+        if(policiesService.removeRuleFromPolicies(id)){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();

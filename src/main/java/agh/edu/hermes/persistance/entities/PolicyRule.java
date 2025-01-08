@@ -12,6 +12,8 @@ public class PolicyRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     public final String name;
+    private int maxRetry;
+    private long cooldownSec;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Clause> conditions;
     @OneToOne(fetch = FetchType.EAGER)
