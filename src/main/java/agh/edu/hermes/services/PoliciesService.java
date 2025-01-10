@@ -35,8 +35,9 @@ public class PoliciesService {
 
     public boolean removeRuleFromPolicies(long id){
         Policies policies = getPolicies();
+        boolean removed = policies.removeRule(id);
         policiesRepository.save(policies);
-        return policies.removeRule(id);
+        return removed;
     }
 
     public Policies getPolicies() {
