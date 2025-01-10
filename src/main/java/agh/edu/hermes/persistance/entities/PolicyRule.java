@@ -12,6 +12,23 @@ public class PolicyRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     public final String name;
+
+    public int getMaxRetry() {
+        return maxRetry;
+    }
+
+    public void setMaxRetry(int maxRetry) {
+        this.maxRetry = maxRetry;
+    }
+
+    public long getCooldownSec() {
+        return cooldownSec;
+    }
+
+    public void setCooldownSec(long cooldownSec) {
+        this.cooldownSec = cooldownSec;
+    }
+
     private int maxRetry;
     private long cooldownSec;
     @OneToMany(fetch = FetchType.EAGER)
@@ -77,7 +94,6 @@ public class PolicyRule {
                 && this.conditions.equals(rule.getConditions())
                 && this.action.equals(rule.action);
     }
-
 
 
     @Override
